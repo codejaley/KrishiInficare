@@ -1,0 +1,346 @@
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small>{{ title }}</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#"><i class="fa fa-dashboard"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item active">{{ title }}</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="box">
+            <!-- <div class="box-header with-border">
+              <h3 class="box-title">{{ title }}</h3>
+              <h6 class="box-subtitle">List Merchant {{ title }}</h6>
+            </div> -->
+            <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+            
+            <!-- /.box-header -->
+            <div class="box-body">
+              
+                <form [formGroup]="mdxDefaultForm" (ngSubmit)="updateMDXdefault()" style="height: 80%" *ngIf="showForm">
+                    <div class="row">
+                      <div class="col-md-6 col-12">
+                          <div class="form-group" >
+                             
+                              <div class="controls">
+                                  
+                               
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  autocomplete="off"
+                                  formControlName="sno"
+                                  [(ngModel)]="mdxDefaultdata.sno"
+                                  aria-invalid="false"
+                                  hidden
+                                  disabled
+                                />
+                              </div>
+                            </div>
+                        <div class="form-group" >
+                         
+                          <div class="controls">
+                              
+                            <label>DB Backup Location <span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              autocomplete="off"
+                              formControlName="backup_location"
+                              [(ngModel)]="mdxDefaultdata.backup_location"
+                              aria-invalid="false"
+                            />
+                           
+                          </div>
+                        </div>
+                        <!-- /.form-group -->
+                  
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label>Institution Identification Code (ISO 32) <span class="text-danger">*</span></label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="form-control"
+                                autocomplete="off"
+                                formControlName="ISO_32_INSTITUTION_IDENTIFICATION_CODE"
+                                [(ngModel)]="mdxDefaultdata.ISO_32_INSTITUTION_IDENTIFICATION_CODE"
+                                aria-invalid="false"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label>Terminal Identification (ISO 41)<span class="text-danger">*</span></label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="form-control"
+                                autocomplete="off"
+                                formControlName="ISO_41_TERMINAL_IDENTIFICATION"
+                                [(ngModel)]="mdxDefaultdata.ISO_41_TERMINAL_IDENTIFICATION"
+                                aria-invalid="false"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label>Identification Code (ISO 42)<span class="text-danger">*</span></label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="form-control"
+                                autocomplete="off"
+                                formControlName="ISO_42_IDENTIFICATION_CODE"
+                                [(ngModel)]="mdxDefaultdata.ISO_42_IDENTIFICATION_CODE"
+                                aria-invalid="false"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label>Name & Location (ISO 43)<span class="text-danger">*</span></label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="form-control"
+                                autocomplete="off"
+                                formControlName="ISO_43_NAMELOCATION"
+                                [(ngModel)]="mdxDefaultdata.ISO_43_NAMELOCATION"
+                                aria-invalid="false"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Account No. Size<span class="text-danger">*</span></label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="form-control"
+                                autocomplete="off"
+                                formControlName="ACCOUNT_MAX_CHAR"
+                                [(ngModel)]="mdxDefaultdata.ACCOUNT_MAX_CHAR"
+                                aria-invalid="false"
+                                placeholder=" (if multile lengths, seperate by commas)"
+                              />
+                            </div>
+                          </div>
+                          <div class="form-group">
+                              <label>Branch Code Size <span class="text-danger">*</span></label>
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  autocomplete="off"
+                                  formControlName="BRANCH_CODE_MAX_CHAR"
+                                  [(ngModel)]="mdxDefaultdata.BRANCH_CODE_MAX_CHAR"
+                                  aria-invalid="false"
+                                />
+                              </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Max Amount Deposit Per Day<span class="text-danger">*</span></label>
+                                <div class="controls">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    autocomplete="off"
+                                    formControlName="MAX_AMOUNT_DEPOSIT_PER_DAY"
+                                    [(ngModel)]="mdxDefaultdata.MAX_AMOUNT_DEPOSIT_PER_DAY"
+                                    aria-invalid="false"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                  <label>Max Amount Withdraw Per Day<span class="text-danger">*</span></label>
+                                  <div class="controls">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      autocomplete="off"
+                                      formControlName="MAX_AMOUNT_WITHDRAW_PER_DAY"
+                                      [(ngModel)]="mdxDefaultdata.MAX_AMOUNT_WITHDRAW_PER_DAY"
+                                      aria-invalid="false"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Max Amount Deposit Per Transaction<span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        autocomplete="off"
+                                        formControlName="MAX_AMOUNT_DEPOSIT_PER_TRANSACTION"
+                                        [(ngModel)]="mdxDefaultdata.MAX_AMOUNT_DEPOSIT_PER_TRANSACTION"
+                                        aria-invalid="false"
+                                      />
+                                    </div>
+                                  </div>
+                  
+                        <!-- /.form-group -->
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-md-6 col-12">
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label>Min Amount Deposit Per Transaction<span class="text-danger">*</span></label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="form-control"
+                                autocomplete="off"
+                                formControlName="MIN_AMOUNT_DEPOSIT_PER_TRANSACTION"
+                                [(ngModel)]="mdxDefaultdata.MIN_AMOUNT_DEPOSIT_PER_TRANSACTION"
+                                aria-invalid="false"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label>Max Amount Withdraw Per Transaction<span class="text-danger">*</span></label>
+                          <div class="controls">
+                            <input
+                              type="text"
+                              class="form-control"
+                              autocomplete="off"
+                              formControlName="MAX_AMOUNT_WITHDRAW_PER_TRANSACTION"
+                              [(ngModel)]="mdxDefaultdata.MAX_AMOUNT_WITHDRAW_PER_TRANSACTION"
+                              aria-invalid="false"
+                            />
+                          </div>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                          <label>Min Amount Withdraw Per Transaction<span class="text-danger">*</span></label>
+                          <div class="controls">
+                            <input
+                              type="text"
+                              class="form-control"
+                              autocomplete="off"
+                              formControlName="MIN_AMOUNT_WITHDRAW_PER_TRANSACTION"
+                              [(ngModel)]="mdxDefaultdata.MIN_AMOUNT_WITHDRAW_PER_TRANSACTION"
+                              aria-invalid="false"
+                            />
+                          </div>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                          <label>Max Queries Against Particular Account No.<span class="text-danger">*</span></label>
+                          <div class="controls">
+                            <input
+                              type="text"
+                              class="form-control"
+                              autocomplete="off"
+                              formControlName="MAX_QUERIES_AGAINST_PARTICULAR_ACCOUNT"
+                              [(ngModel)]="mdxDefaultdata.MAX_QUERIES_AGAINST_PARTICULAR_ACCOUNT"
+                              aria-invalid="false"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Max OTP Resend Per Transaction<span class="text-danger">*</span></label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="form-control"
+                                autocomplete="off"
+                                formControlName="MAX_OTP_RESEND_PER_TRANSACTION"
+                                [(ngModel)]="mdxDefaultdata.MAX_OTP_RESEND_PER_TRANSACTION"
+                                aria-invalid="false"
+                              />
+                            </div>
+                          </div>
+                          <div class="form-group">
+                              <label>OTP Resend Interval Time (seconds)<span class="text-danger">*</span></label>
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  autocomplete="off"
+                                  formControlName="OTP_RESEND_INTERVAL_TIME"
+                                  [(ngModel)]="mdxDefaultdata.OTP_RESEND_INTERVAL_TIME"
+                                  aria-invalid="false"
+                                />
+                              </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Service Charge Per Transaction<span class="text-danger">*</span></label>
+                                <div class="controls">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    autocomplete="off"
+                                    formControlName="SERVICE_CHARGE_PER_TRANSACTION"
+                                    [(ngModel)]="mdxDefaultdata.SERVICE_CHARGE_PER_TRANSACTION"
+                                    aria-invalid="false"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                  <label>Service Charge Monthly<span class="text-danger">*</span></label>
+                                  <div class="controls">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      autocomplete="off"
+                                      formControlName="SERVICE_CHARGE_MONTHLY"
+                                      [(ngModel)]="mdxDefaultdata.SERVICE_CHARGE_MONTHLY"
+                                      aria-invalid="false"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Service Charge Yearly<span class="text-danger">*</span></label>
+                                    <div class="controls">
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        autocomplete="off"
+                                        formControlName="SERVICE_CHARGE_YEARLY"
+                                        [(ngModel)]="mdxDefaultdata.SERVICE_CHARGE_YEARLY"
+                                        aria-invalid="false"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Created By:{{mdxDefaultdata.createdBY}}||{{mdxDefaultdata.createdTS}}</label>
+                                      <label>Updated By:{{mdxDefaultdata.updatedBY}}||{{mdxDefaultdata.updatedTS}}</label>
+                                     
+                                    </div>
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-info">
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  

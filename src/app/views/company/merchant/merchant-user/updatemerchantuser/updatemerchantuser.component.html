@@ -1,0 +1,715 @@
+<div class="content-wrapper" style="margin-left: -100px;min-width: 800px">
+    <section class="content-header">
+      <h1>
+        Edit Merchant User
+        <small></small>
+      </h1>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="box">
+
+
+          <form [formGroup]="updatemerchantuserForm" (ngSubmit)="updateMuser()">
+              <ul
+                ngbNav
+                #nav="ngbNav"
+                [(activeId)]="active"
+
+                class="nav-tabs"
+              >
+
+                <li [ngbNavItem]="1">
+                  <a ngbNavLink>Details</a>
+                  <ng-template ngbNavContent>
+                    <div class="form-horizontal ">
+                      <div class="box-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label for="inputEmail3" class="col-sm-3 control-label"
+                                >LoginID<span class="text-danger">*</span></label
+                              >
+                              <input
+                              type="text"
+                              class="form-control"
+                              autocomplete="off"
+                              formControlName="limited_date"
+                              style="display: none"
+
+                            /><input
+                            type="text"
+                            class="form-control"
+                            autocomplete="off"
+                            formControlName="lock_days"
+                            style="display: none"
+
+                          /><input
+                          type="text"
+                          class="form-control"
+                          autocomplete="off"
+                          formControlName="last_login"
+                          style="display: none"
+
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          autocomplete="off"
+                          formControlName="upload"
+                          style="display: none"
+
+                        />
+                              <div class="col-sm-9">
+
+                                  <input
+                                  type="text"
+                                  class="form-control"
+                                  autocomplete="off"
+                                  formControlName="agent_user_id"
+                                  style="display: none"
+
+                                />
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  autocomplete="off"
+                                  formControlName="User_login_Id"
+                                  [(ngModel)]="dData.User_login_Id"
+
+                                />
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-3 control-label"
+                                  >EmailID<span class="text-danger">*</span></label
+                                >
+
+                                <div class="col-sm-9">
+                                  <input
+                                    type="email"
+                                    class="form-control"
+                                    autocomplete="off"
+                                    formControlName="user_email"
+                                    [(ngModel)] = "dData.user_email"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label for="inputEmail3" class="col-sm-3 control-label"
+                                    >Merchant Code<span class="text-danger">*</span></label
+                                  >
+
+                                  <div class="col-sm-9">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      autocomplete="off"
+                                      formControlName="user_post"
+                                      [(ngModel)] = "dData.user_post"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-3 control-label"
+                                      >Account No<span class="text-danger">*</span></label
+                                    >
+
+                                    <div class="col-sm-9">
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        autocomplete="off"
+                                        formControlName="merchant_accountno"
+                                        [(ngModel)] = "dData.merchant_accountno"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label for="inputEmail3" class="col-sm-3 control-label"
+                                        >URl</label
+                                      >
+
+                                      <div class="col-sm-9">
+                                        <input
+                                          type="url"
+                                          class="form-control"
+                                          autocomplete="off"
+                                          formControlName="url"
+                                          [(ngModel)] = "dData.url"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="form-group row">
+
+
+                                              <label for="Remember" class="col-sm-3 control-label">Enable SMS Alert</label>
+                                              <div class="checkbox">
+                                              <div class="col-sm-9"><mat-checkbox [checked]="c1" (change)="toggle($event)" formControlName="enable_sms_alert" [(ngModel)] = "dData.enable_sms_alert"></mat-checkbox></div>
+                                                  {{dData.enable_sms_alert}}
+                                        </div>
+
+                                      </div>
+                                      <div class="form-group row">
+                                          <label for="inputEmail3" class="col-sm-3 control-label"
+                                            >Remarks</label
+                                          >
+
+                                          <div class="col-sm-9">
+                                              <textarea class="form-control" rows="3" placeholder="Enter ..." formControlName="user_remarks" [(ngModel)] = "dData.user_remarks"></textarea>
+                                          </div>
+                                        </div>
+
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label for="inputEmail3" class="col-sm-3 control-label"
+                                    >Name<span class="text-danger">*</span></label
+                                  >
+
+                                  <div class="col-sm-9">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      autocomplete="off"
+                                      formControlName="user_name"
+                                      [(ngModel)] = "dData.user_name"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-3 control-label"
+                                      >Merchant Id</label
+                                    >
+
+                                    <div class="col-sm-9">
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        autocomplete="off"
+                                        formControlName="agent_branch_code"
+                                        readonly
+
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label for="inputEmail3" class="col-sm-3 control-label"
+                                        >Signature Passcode<span class="text-danger">*</span></label
+                                      >
+
+                                      <div class="col-sm-9">
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          autocomplete="off"
+                                          formControlName="SIGNATURE_Passcode"
+                                          [(ngModel)] = "dData.SIGNATURE_Passcode"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-3 control-label"
+                                          >Allowed IP<span class="text-danger">*</span></label
+                                        >
+
+                                        <div class="col-sm-9">
+                                          <input
+                                            type="text"
+                                            class="form-control"
+                                            autocomplete="off"
+                                            formControlName="allow_ip_address"
+                                            [(ngModel)] = "dData.allow_ip_address"
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                          <label for="inputEmail3" class="col-sm-3 control-label"
+                                            >Change Password<span class="text-danger">*</span></label
+                                          >
+                                          <div class="col-sm-9">
+                                          <select class="form-control" matNativeControl required>
+                                            <option value="M" selected="selected">Manual</option>
+                                            <option value="A">Automatic</option>
+
+                                          </select>
+                                        </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-3 control-label"
+                                              >Delivery Url<span class="text-danger">*</span></label
+                                            >
+
+                                            <div class="col-sm-9">
+                                              <input
+                                                type="url"
+                                                class="form-control"
+                                                autocomplete="off"
+                                                formControlName="dlr_URL"
+                                                [(ngModel)] = "dData.dlr_URL"
+                                              />
+                                            </div>
+                                          </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.box-body -->
+
+                    </div>
+                  </ng-template>
+                </li>
+
+                <li [ngbNavItem]="2">
+                  <a ngbNavLink>Default ISO</a>
+                  <ng-template ngbNavContent>
+                      <div class="form-horizontal ">
+                          <div class="box-body">
+                            <div class="row">
+
+                              <div class="col-md-12">
+                                  <div class="form-group row">
+
+
+                                      <label for="Remember" class="col-sm-5 control-label">Use Default ISO</label>
+                                      <div class="checkbox">
+                                      <div class="col-sm-7"><mat-checkbox  [checked]="checked" (change)="toggle1($event)" formControlName="default_iso" [(ngModel)]="dData.default_iso"></mat-checkbox></div>
+
+                                  </div>
+
+                              </div>
+                                  <div class="form-group row">
+                                      <label for="inputEmail3" class="col-sm-5 control-label"
+                                        >Institution Identification Code (ISO 32)</label
+                                      >
+
+                                      <div class="col-sm-7">
+                                        <input
+                                          type="text"
+                                          class="form-control"
+
+                                          autocomplete="off"
+
+                                          [disabled]="disabled"
+                                          [readOnly]="disabled"
+
+                                          formControlName="ISO_32"
+                                          [(ngModel)]="dData.ISO_32"
+
+                                        />
+                                      </div>
+                                    </div>
+
+                                      <div class="form-group row">
+                                          <label for="inputEmail3" class="col-sm-5 control-label"
+                                            >Terminal Identification (ISO 41)</label
+                                          >
+
+                                          <div class="col-sm-7">
+                                            <input
+                                              type="text"
+                                              class="form-control"
+                                              autocomplete="off"
+                                              formControlName="ISO_41"
+                                              [disabled]="disabled"
+                                              [readOnly]="disabled"
+                                              [(ngModel)]="dData.ISO_41"
+                                            />
+                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-5 control-label"
+                                              >Identification Code (ISO 42)</label
+                                            >
+
+                                            <div class="col-sm-7">
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                autocomplete="off"
+                                                formControlName="ISO_42"
+                                                [disabled]="disabled"
+                                                [readOnly]="disabled"
+                                                [(ngModel)]="dData.ISO_42"
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="inputEmail3" class="col-sm-5 control-label"
+                                                >Name & Location (ISO 43)</label
+                                              >
+
+                                              <div class="col-sm-7">
+                                                <input
+                                                  type="text"
+                                                  class="form-control"
+                                                  autocomplete="off"
+                                                  formControlName="ISO_43"
+                                                  [disabled]="disabled"
+                                                  [readOnly]="disabled"
+                                                  [(ngModel)]="dData.ISO_43"
+                                                />
+                                              </div>
+                                            </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <!-- /.box-body -->
+
+                        </div>
+                  </ng-template>
+                </li>
+                <li [ngbNavItem]="3">
+                  <a ngbNavLink>Methods</a>
+                  <ng-template ngbNavContent>
+                      <div class="form-horizonta">
+                          <div class="row">
+
+                              <div class="col-md-12">
+                          <div class="box-body">
+                              <pre><h5>Methods</h5></pre>
+                           <div class="row">
+                              <div class="col-md-6">
+
+                                  <div class="form-group row">
+                                      <label for="Remember" class="col-sm-6 control-label">All</label>
+                                      <div class="checkbox">
+                                      <div class="col-sm-6"><mat-checkbox [value]="method" [checked]="checked" (change)="toggle2($event)" formControlName="method_name" [(ngModel)]="dData.method_name"></mat-checkbox></div>
+                                  </div>
+                                   </div>
+                                   <div class="form-group row">
+                                      <label for="Remember" class="col-sm-6 control-label">SMSPLUS WITHDRAW</label>
+                                      <div class="checkbox">
+                                      <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+                                   </div>
+                                   </div>
+                                   <div class="form-group row">
+                                      <label for="Remember" class="col-sm-6 control-label">MONEY PAY</label>
+                                      <div class="checkbox">
+                                      <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+                                   </div>
+                                   </div>
+                                   <div class="form-group row">
+                                      <label for="Remember" class="col-sm-6 control-label">ONLINE ACCOUNT CREDIT</label>
+                                      <div class="checkbox">
+                                      <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+                                   </div>
+                                   </div>
+                                   <div class="form-group row">
+                                      <label for="Remember" class="col-sm-6 control-label">CHEQUE DEPOSIT</label>
+                                      <div class="checkbox">
+                                      <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+                                   </div>
+                                   </div>
+                                   <div class="form-group row">
+                                      <label for="Remember" class="col-sm-6 control-label">FUND TRANSFER</label>
+                                      <div class="checkbox">
+                                      <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+                                   </div>
+                                   </div>
+                                   <div class="form-group row">
+                                      <label for="Remember" class="col-sm-6 control-label">ACCOUNT SETTLEMENT</label>
+                                      <div class="checkbox">
+                                      <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+                                   </div>
+                                   </div>
+                                   <div class="form-group row">
+                                      <label for="Remember" class="col-sm-6 control-label">CHEQUE OUTWARD</label>
+                                      <div class="checkbox">
+                                      <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+                                   </div>
+                                   </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                      <div class="form-group row">
+                                         <label for="Remember" class="col-sm-6 control-label">SMSPLUS DEPOSIT</label>
+                                          <div class="checkbox">
+                                          <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+                                           </div>
+                                       </div>
+                                       <div class="form-group row">
+                                              <label for="Remember" class="col-sm-6 control-label">MONEY SEND</label>
+                                          <div class="checkbox">
+                                          <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+                                           </div>
+                                       </div>
+                                       <div class="form-group row">
+                                                 <label for="Remember" class="col-sm-6 control-label">ACCOUNT VERIFICATION</label>
+                                          <div class="checkbox">
+                                          <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+
+                                      </div>
+                                       </div>
+                                       <div class="form-group row">
+
+                                          <label for="Remember" class="col-sm-6 control-label">SMSPLUS SERVICE</label>
+                                          <div class="checkbox">
+                                          <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+
+
+                                          </div>
+                                       </div>
+                                       <div class="form-group row">
+
+                                          <label for="Remember" class="col-sm-6 control-label">CHEQUE WITHDRAW</label>
+                                          <div class="checkbox">
+                                          <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+
+
+                                          </div>
+                                       </div>
+                                       <div class="form-group row">
+
+                                          <label for="Remember" class="col-sm-6 control-label">REVERSE TRANSACTION</label>
+                                          <div class="checkbox">
+                                          <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+
+
+                                          </div>
+                                       </div>
+                                       <div class="form-group row">
+
+                                          <label for="Remember" class="col-sm-6 control-label">CHEQUE INWARD</label>
+                                          <div class="checkbox">
+                                          <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+
+
+                                          </div>
+                                       </div>
+                                       <div class="form-group row">
+
+                                          <label for="Remember" class="col-sm-6 control-label">ACCOUNT VERIFICATION V2</label>
+                                          <div class="checkbox">
+                                          <div class="col-sm-6"><mat-checkbox [disabled]="disabled"></mat-checkbox></div>
+
+
+                                          </div>
+                                       </div>
+                                </div>
+                              </div>
+                          </div>
+                          </div>
+                          </div>
+                          <!-- /.box-body -->
+
+                        </div>
+                  </ng-template>
+                </li>
+                <li [ngbNavItem]="4">
+                  <a ngbNavLink>Default Limitation</a>
+                  <ng-template ngbNavContent>
+                      <div class="form-horizontal ">
+                          <div class="box-body">
+                            <div class="row">
+
+                              <div class="col-md-12">
+                                  <div class="form-group row">
+
+
+                                      <label for="Remember" class="col-sm-5 control-label">Use Default Limitation</label>
+                                      <div class="checkbox">
+                                      <div class="col-sm-7"><mat-checkbox [value]="dlimit" [checked]="checked" (change)="toggle3($event)" formControlName="default_limit"></mat-checkbox></div>
+
+                                  </div>
+
+                              </div>
+                                  <div class="form-group row">
+                                      <label for="inputEmail3" class="col-sm-5 control-label"
+                                        >Max Deposit Per Day</label
+                                      >
+
+                                      <div class="col-sm-7">
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          autocomplete="off"
+                                          formControlName="deposit_per_day"
+                                          [disabled]="disabled"
+                                          [readOnly]="disabled"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-5 control-label"
+                                          >Max Withdraw Per Day</label
+                                        >
+
+                                        <div class="col-sm-7">
+                                          <input
+                                            type="text"
+                                            class="form-control"
+                                            autocomplete="off"
+                                            formControlName="withdraw_per_day"
+                                            [disabled]="disabled"
+                                            [readOnly]="disabled"
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                          <label for="inputEmail3" class="col-sm-5 control-label"
+                                            >Max Deposit Per Transaction</label
+                                          >
+
+                                          <div class="col-sm-7">
+                                            <input
+                                              type="text"
+                                              class="form-control"
+                                              autocomplete="off"
+                                              formControlName="deposit_per_transaction"
+                                              [disabled]="disabled"
+                                              [readOnly]="disabled"
+                                            />
+                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-5 control-label"
+                                              >Min Deposit Per Transaction</label
+                                            >
+
+                                            <div class="col-sm-7">
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                autocomplete="off"
+                                                [disabled]="disabled"
+                                                [readOnly]="disabled"
+                                                formControlName="min_deposit_per_transaction"
+                                                placeholder="0 for limit"
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="inputEmail3" class="col-sm-5 control-label"
+                                                >Max Withdraw Per Transaction</label
+                                              >
+
+                                              <div class="col-sm-7">
+                                                <input
+                                                  type="text"
+                                                  class="form-control"
+                                                  autocomplete="off"
+                                                  formControlName="withdraw_per_transaction"
+                                                  [disabled]="disabled"
+                                                  [readOnly]="disabled"
+                                                />
+                                              </div>
+                                            </div>
+
+                                              <div class="form-group row">
+                                                  <label for="inputEmail3" class="col-sm-5 control-label"
+                                                    >Min Withdraw Per Transaction</label
+                                                  >
+
+                                                  <div class="col-sm-7">
+                                                    <input
+                                                      type="text"
+                                                      class="form-control"
+                                                      autocomplete="off"
+                                                      [disabled]="disabled"
+                                                      [readOnly]="disabled"
+                                                      formControlName="min_withdraw_per_transaction"
+                                                      placeholder="0 for limit"
+                                                    />
+                                                  </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputEmail3" class="col-sm-5 control-label"
+                                                      >Max Queries Against Account No.</label
+                                                    >
+
+                                                    <div class="col-sm-7">
+                                                      <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        autocomplete="off"
+                                                        formControlName="query_per_account"
+                                                        [disabled]="disabled"
+                                                        [readOnly]="disabled"
+                                                      />
+                                                    </div>
+                                                  </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <!-- /.box-body -->
+
+                        </div>
+                  </ng-template>
+                </li>
+                <li [ngbNavItem]="5">
+                    <a ngbNavLink>Service Charge</a>
+                    <ng-template ngbNavContent>
+                        <div class="form-horizontal">
+                            <div class="box-body">
+                              <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                       <label for="Remember" class="col-sm-3 control-label">Use Default Service Charge</label>
+                                        <div class="checkbox">
+                                        <div class="col-sm-9"><mat-checkbox  [checked]="checked" (change)="toggle4($event)" formControlName="default_serviceCharge" [(ngModel)]="dData.default_serviceCharge"></mat-checkbox></div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label for="Remember" class="col-sm-3 control-label">Service Charge</label>
+                                       <div class="checkbox">
+                                       <div class="col-sm-9"><mat-radio-group aria-label="Select an option" style="display: inline" formControlName="sChargeType" [(ngModel)]="dData.sChargeType">
+                                          <mat-radio-button value="T" style="display: inline">Per Transaction</mat-radio-button>
+                                          <mat-radio-button value="M" style="display: inline">Monthly</mat-radio-button>
+                                          <mat-radio-button value="Y" style="display: inline">Yearly</mat-radio-button>{{Scharge}}
+                                        </mat-radio-group>
+                                        <input type="text" class="form-control" style="display: inline" autocomplete="off"  [disabled]="disabled" [readOnly]="disabled" formControlName="sChargeAmt" [(ngModel)]="dData.sChargeAmt"/>
+                                      </div>
+                                     </div>
+                                 </div>
+                                 <div class="form-group row">
+                                 <button type="button" class="btn btn-info pull-left" (click)="transactionFee()">
+                                  Transaction Fee
+                                </button></div>
+
+
+                                 </div>
+                              </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                          </div>
+                    </ng-template>
+                </li>
+
+
+              </ul>
+
+
+
+
+
+
+              <div [ngbNavOutlet]="nav" class="mt-2"></div>
+              <div class="box-footer">
+
+
+                <button type="submit" class="btn btn-info pull-left">
+                  Update
+                </button>
+
+                <button
+                type="button"
+                class="btn btn-info" style="transform: translateX(100%);">
+                Change Password
+              </button>
+              <button type="button" class="btn btn-info pull-right">
+                Audit Report
+              </button>
+              <button type="button" class="btn btn-info pull-left" (click)="activeModal.close()">
+                Cancel
+              </button>
+                </div>
+            </form>
+      </div>
+    </section>
+  </div>

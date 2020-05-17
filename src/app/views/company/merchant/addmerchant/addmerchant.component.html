@@ -1,0 +1,221 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add Merchant</h4>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addmerchantForm" (ngSubmit)="addMerchant()">
+    <div class="row" [style.padding]="'-20px -20px'">
+      <div class="col-md-12 col-12">
+        <div class="form-group">
+          <h5>Company Name <span class="text-danger">*</span></h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="Branch"
+              aria-invalid="false"
+            />
+
+            <div
+              *ngIf="f.Branch.touched && f.Branch.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.Branch.errors.required">
+                Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Address <span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Address"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Address.touched && f.Address.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Address.errors.required">
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Contact Person<span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="contactPerson"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.contactPerson.touched && f.contactPerson.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.contactPerson.errors.required">
+                  Contact Person is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Email</h5>
+            <div class="controls">
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                formControlName="email"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.email.touched && f.email.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.email.errors.email">
+                  Email required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Telephone<span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Telephone"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Telephone.touched && f.Telephone.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Telephone.errors.pattern">
+                  Please enter numeric value
+                </div>
+                <div *ngIf="f.Telephone.errors.minlength">
+                  Phone should be of minlength 7
+                </div>
+                <div *ngIf="f.Telephone.errors.maxlength">
+                  Phone should be of maxlength 10
+                </div>
+
+                <div *ngIf="f.Telephone.errors.required">
+                  Phone is required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Fax No</h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Fax"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Fax.touched && f.Fax.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Fax.errors.pattern">
+                  Please enter numeric value.
+                </div>
+                <div *ngIf="f.Fax.errors.minlength">
+                  Fax should be of minlength 12.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h5>City<span class="text-danger">*</span></h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="City"
+              aria-invalid="false"
+            />
+            <div
+              *ngIf="f.City.touched && f.City.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.City.errors.required">
+                CITY is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h5>Country<span class="text-danger">*</span></h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="Country"
+              aria-invalid="false"
+              readonly
+            />
+            <div
+              *ngIf="f.Country.touched && f.Country.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.Country.errors.required">
+                COUNTRY is required
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+
+      <!-- /.col -->
+    </div>
+    <div class="modal-footer">
+      <button
+        type="submit"
+        class="btn btn-info"
+        [disabled]="!addmerchantForm.valid"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        class="btn btn-info"
+        (click)="activeModal.close('Cross click')"
+      >
+        Close
+      </button>
+    </div>
+  </form>
+</div>

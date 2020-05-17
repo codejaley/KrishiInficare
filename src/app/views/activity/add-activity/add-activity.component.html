@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <h4 class="modal-title">Hi there!</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addactivityForm" (ngSubmit)="addActivity()">
+    <div class="form-group">
+      <h5>Activity {{ user.name }} <span class="text-danger">*</span></h5>
+      <div class="controls">
+        <input
+          type="text"
+          class="form-control"
+          required
+          autocomplete="off"
+          formControlName="name"
+          data-validation-required-message="This field is required"
+          aria-invalid="false"
+        />
+        <div class="help-block"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <h5>Activity Description<span class="text-danger">*</span></h5>
+      <div class="controls">
+        <input
+          type="text"
+          class="form-control"
+          required
+          autocomplete="off"
+          formControlName="job"
+          data-validation-required-message="This field is required"
+          aria-invalid="false"
+        />
+        <div class="help-block"></div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-info">Submit</button>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-info">Submit</button>
+  <button
+    type="button"
+    class="btn btn-info"
+    (click)="activeModal.close('Close click')"
+  >
+    Close
+  </button>
+</div>

@@ -1,0 +1,8 @@
+.dataTables_wrapper .dataTables_filter {
+  float: left !important;
+  text-align: left !important;
+}
+
+#dataTables_Filter {
+  float: left !important;
+}

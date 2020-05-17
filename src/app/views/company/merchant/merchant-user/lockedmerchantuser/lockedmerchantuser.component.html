@@ -1,0 +1,107 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>{{ title }}</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#"><i class="fa fa-dashboard"></i> Home</a>
+      </li>
+      <li class="breadcrumb-item active">{{ title }}</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="box">
+          <pre>
+            Locked Merchant Users :
+           {{ count }}
+          </pre>
+
+          <!-- <div class="box-header with-border">
+              <h3 class="box-title">{{ title }}</h3>
+              <h6 class="box-subtitle">List Merchant {{ title }}</h6>
+            </div> -->
+
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="table table-responsive table-hover w-p100 dataTable">
+              <table
+                *ngIf="tableData"
+                datatable="ng"
+                [dtOptions]="dtOptions"
+                [dtTrigger]="dtTrigger"
+                class="display"
+                style="width:100%"
+                id="tableMerchantUser"
+              >
+                <thead>
+                  <tr>
+                    <th [style.display]="'none'">ID</th>
+                    <th [style.display]="'none'">BID</th>
+                    <th [style.display]="'none'">EID</th>
+                    <th>SNO</th>
+
+                    <th>User ID</th>
+
+                    <th>Last Login</th>
+
+                    <th>IP ADDRESS</th>
+                    <th>Lock/Unlock</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let merchantUser of tableData; index as i">
+                    <td [style.display]="'none'">
+                      {{ merchantUser.agentid }}
+                    </td>
+                    <td [style.display]="'none'">
+                      {{ merchantUser.agent_branch_code }}
+                    </td>
+                    <td [style.display]="'none'">
+                      {{ merchantUser.emp_id }}
+                    </td>
+                    <td>{{ i + 1 }}</td>
+
+                    <td>{{ merchantUser.UserID }}</td>
+
+                    <td>{{ merchantUser.LastLogin }}</td>
+                    <td>{{ merchantUser.IPAddress }}</td>
+
+                    <td>
+                      <button
+                        id="lock"
+                        type="button"
+                        class="btn btn-danger"
+                        *ngIf="
+                          merchantUser.lock_status === null ||
+                            merchantUser.lock_status === 'n';
+                          else elseBlock2
+                        "
+                      >
+                        LOCK
+                      </button>
+                    </td>
+                    <ng-template #elseBlock2>
+                      <button id="lock" type="button" class="btn btn-success">
+                        UNLOCK
+                      </button>
+                    </ng-template>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>

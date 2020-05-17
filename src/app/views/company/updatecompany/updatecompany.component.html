@@ -1,0 +1,266 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit Company</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="updatecompanyForm" (ngSubmit)="updateCompany()">
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <h5>Company Name <span class="text-danger">*</span></h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="agentCode"
+              [(ngModel)]="data.agentCode"
+              aria-invalid="false"
+              hidden
+              disabled
+            />
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="companyname"
+              [(ngModel)]="data.CompanyName"
+              aria-invalid="false"
+            />
+            <div
+              *ngIf="f.companyname.touched && f.companyname.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.companyname.errors.required">
+                Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Address <span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="address"
+                [(ngModel)]="data.Address"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.address.touched && f.address.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.address.errors.required">
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <h5>City<span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="city"
+                [(ngModel)]="data.City"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.city.touched && f.city.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.city.errors.required">
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Phone 1<span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="tel"
+                class="form-control"
+                autocomplete="off"
+                formControlName="phone1"
+                [(ngModel)]="data.Phone1"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.phone1.touched && f.phone1.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.phone1.errors.pattern">
+                  Please enter numeric value
+                </div>
+                <div *ngIf="f.phone1.errors.minlength">
+                  Phone should be of minlength 7
+                </div>
+                <div *ngIf="f.phone1.errors.maxlength">
+                  Phone should be of maxlength 10
+                </div>
+
+                <div *ngIf="f.phone1.errors.required">
+                  Phone is required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Fax No</h5>
+            <div class="controls">
+              <input
+                type="tel"
+                class="form-control"
+                autocomplete="off"
+                formControlName="fax"
+                [(ngModel)]="data.Fax"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.fax.touched && f.fax.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.fax.errors.pattern">
+                  Please enter numeric value.
+                </div>
+                <div *ngIf="f.fax.errors.minlength">
+                  Fax should be of minlength 12.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Email</h5>
+            <div class="controls">
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                formControlName="email"
+                [(ngModel)]="data.Email"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.email.touched && f.email.invalid"
+                class="help-block"
+              >
+                <div *ngIf="f.email.errors.email">
+                  Email required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h5>Company Code</h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="agent_short_code"
+              [(ngModel)]="data.agent_short_code"
+              aria-invalid="false"
+            />
+            <div class="help-block"></div>
+          </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+          <h5>Country<span class="text-danger">*</span></h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="country"
+              [(ngModel)]="data.Country"
+              aria-invalid="false"
+            />
+            <div
+              *ngIf="f.country.touched && f.country.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.country.errors.required">
+                COUNTRY is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+          <h5>Phone2</h5>
+          <div class="controls">
+            <input
+              type="tel"
+              class="form-control"
+              autocomplete="off"
+              formControlName="phone2"
+              [(ngModel)]="data.Phone2"
+              aria-invalid="false"
+            />
+            <div
+              *ngIf="f.phone2.touched && f.phone2.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.phone2.errors.pattern">
+                Please enter numeric value
+              </div>
+              <div *ngIf="f.phone2.errors.minlength">
+                Phone should be of minlength 7
+              </div>
+              <div *ngIf="f.phone2.errors.maxlength">
+                Phone should be of maxlength 10
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.col -->
+    </div>
+    <div class="modal-footer">
+      <button
+        type="submit"
+        class="btn btn-info"
+        [disabled]="!updatecompanyForm.valid"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        class="btn btn-info"
+        (click)="activeModal.close('Cross click')"
+      >
+        Close
+      </button>
+    </div>
+  </form>
+</div>

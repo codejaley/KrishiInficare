@@ -1,0 +1,27 @@
+export class MDXDefault {
+  sno: string;
+  ISO_32_INSTITUTION_IDENTIFICATION_CODE: string;
+  ISO_41_TERMINAL_IDENTIFICATION: string;
+  ISO_42_IDENTIFICATION_CODE: string;
+  ISO_43_NAMELOCATION: string;
+  ACCOUNT_MAX_CHAR: string;
+  BRANCH_CODE_MAX_CHAR: string;
+  MAX_AMOUNT_DEPOSIT_PER_DAY: string;
+  MAX_AMOUNT_WITHDRAW_PER_DAY: string;
+  MAX_AMOUNT_DEPOSIT_PER_TRANSACTION: string;
+  MAX_AMOUNT_WITHDRAW_PER_TRANSACTION: string;
+  MAX_QUERIES_AGAINST_PARTICULAR_ACCOUNT: string;
+  createdTS: string;
+  createdBY: string;
+  updatedTS: string;
+  updatedBY: string;
+  backup_location: string;
+  unit_id: string;
+  MAX_OTP_RESEND_PER_TRANSACTION: string;
+  OTP_RESEND_INTERVAL_TIME: string;
+  SERVICE_CHARGE_PER_TRANSACTION: string;
+  SERVICE_CHARGE_MONTHLY: string;
+  SERVICE_CHARGE_YEARLY: string;
+  MIN_AMOUNT_DEPOSIT_PER_TRANSACTION: string;
+  MIN_AMOUNT_WITHDRAW_PER_TRANSACTION: string;
+}

@@ -1,0 +1,9 @@
+@import "assets/vendor_components/bootstrap/dist/css/bootstrap.min.css";
+@import "assets/css/bootstrap-extend.css";
+@import "assets/css/master_style.css";
+@import "assets/css/skins/_all-skins.css";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+
+

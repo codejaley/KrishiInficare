@@ -1,0 +1,87 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>{{ title }} List</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#"><i class="fa fa-dashboard"></i> Home</a>
+      </li>
+      <li class="breadcrumb-item active">{{ title }}</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="box">
+          <!-- <div class="box-header with-border">
+              <h3 class="box-title">{{ title }}</h3>
+              <h6 class="box-subtitle">List Merchant {{ title }}</h6>
+            </div> -->
+
+          <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="table-responsive">
+              <table
+                *ngIf="tableData"
+                datatable="ng"
+                [dtOptions]="dtOptions"
+                [dtTrigger]="dtTrigger"
+                class="display"
+                style="width:100%"
+                id="table2"
+              >
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th style="display: none">SNO</th>
+                    <th>ActivityName</th>
+                    <th>Description</th>
+                    <th>Created Time</th>
+
+                    <th>Created By</th>
+
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let activity of tableData">
+                    <td>{{ activity.sno }}</td>
+                    <td style="display: none">{{ activity.type_id }}</td>
+                    <td>{{ activity.activityName }}</td>
+                    <td>{{ activity.remarks }}</td>
+                    <td>{{ activity.created_by }}</td>
+                    <td>{{ activity.created_ts }}</td>
+
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-info remove"
+                          style="margin-right:16px;"
+                        >
+                          <span
+                            class="glyphicon  glyphicon glyphicon-remove"
+                            aria-hidden="true"
+                          ></span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>

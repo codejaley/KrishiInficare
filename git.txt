@@ -1,0 +1,11 @@
+echo "# KrishiInficare" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/codejaley/KrishiInficare.git
+git push -u origin master
+                
+existing repo add
+
+git remote add origin https://github.com/codejaley/KrishiInficare.git
+git push -u origin master

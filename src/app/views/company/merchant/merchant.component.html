@@ -1,0 +1,155 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>{{ title }}</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#"><i class="fa fa-dashboard"></i> Home</a>
+      </li>
+      <li class="breadcrumb-item active">{{ title }}</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="box">
+          <!-- <div class="box-header with-border">
+              <h3 class="box-title">{{ title }}</h3>
+              <h6 class="box-subtitle">List Merchant {{ title }}</h6>
+            </div> -->
+          <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="table-responsive">
+              <table
+                *ngIf="tableData"
+                datatable="ng"
+                [dtOptions]="dtOptions"
+                [dtTrigger]="dtTrigger"
+                class="display"
+                style="width:100%"
+                id="tableMerchant"
+              >
+                <thead>
+                  <button class="btn btn-primary" (click)="addMerchant()">
+                    Add Merchant
+                  </button>
+
+                  <tr>
+                    <th [style.display]="'none'">ID</th>
+                    <th [style.display]="'none'">B.ID</th>
+                    <th>SNO</th>
+                    <th>Merchant Name</th>
+                    <th>Merchant Address</th>
+
+                    <th>Is Blocked?</th>
+                    <th>Lock/Unlock</th>
+                    <th>Actions</th>
+                    <th>User</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let merchant of tableData; index as i">
+                    <td [style.display]="'none'">
+                      {{ merchant.agentCode }}
+                    </td>
+                    <td [style.display]="'none'">
+                      {{ merchant.agent_branch_code }}
+                    </td>
+                    <td>{{ i + 1 }}</td>
+
+                    <td>{{ merchant.Branch }}</td>
+                    <td>{{ merchant.Address }}</td>
+
+                    <td
+                      *ngIf="
+                        merchant.block_branch === null ||
+                          merchant.block_branch === 'n';
+                        else elseBlock
+                      "
+                      [ngClass]="'bg-success'"
+                    >
+                      No
+                    </td>
+                    <ng-template #elseBlock
+                      ><td [ngClass]="'bg-danger'">
+                        YES
+                      </td></ng-template
+                    >
+                    <td>
+                      <button
+                        id="lock"
+                        type="button"
+                        class="btn btn-danger"
+                        *ngIf="
+                          merchant.block_branch === null ||
+                            merchant.block_branch === 'n';
+                          else elseBlock
+                        "
+                      >
+                        Block
+                      </button>
+                    </td>
+                    <ng-template #elseBlock2>
+                      <button id="lock" type="button" class="btn btn-success">
+                        Grant
+                      </button>
+                    </ng-template>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          id="view"
+                          type="button"
+                          class="btn btn-info view"
+                          style="margin-right:16px;"
+                        >
+                          <span class="fa fa-eye " aria-hidden="true"></span>
+                        </button>
+                        <button
+                          id="edit"
+                          type="button"
+                          class="btn btn-info edit"
+                          style="margin-right:16px;"
+                        >
+                          <span class="fa fa-edit" aria-hidden="true"></span>
+                        </button>
+                        <button
+                          id="del"
+                          type="button"
+                          class="btn btn-info remove"
+                          style="margin-right:16px;"
+                        >
+                          <span class="fa fa-remove" aria-hidden="true"></span>
+                        </button>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          id="user"
+                          type="button"
+                          class="btn btn-info user"
+                          style="margin-right:16px;"
+                        >
+                          <span class="fa fa-eye " aria-hidden="true"></span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>

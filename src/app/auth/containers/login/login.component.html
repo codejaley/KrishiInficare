@@ -1,0 +1,110 @@
+<section
+  style="
+display: block;
+position: absolute;
+z-index: -1;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+background: #005bea;
+background: -webkit-linear-gradient(bottom, #005bea, #00c6fb);
+background: -o-linear-gradient(bottom, #005bea, #00c6fb);
+background: -moz-linear-gradient(bottom, #005bea, #00c6fb);
+background: linear-gradient(bottom, #005bea, #00c6fb);
+opacity: 0.9;"
+>
+  <div class="container h-p100">
+    <div class="row h-p100 align-items-center justify-content-md-center">
+      <div class="col-lg-4 col-md-8 col-12">
+        <div
+          class="block-content block-content-full text-center bg-pale-success"
+        >
+          <img
+            class="rounded"
+            src="../../../../assets//mega-bank-ltd34.png"
+            alt=""
+          />
+        </div>
+        <div class="box box-body rounded">
+          <h3 class="login-box-msg">WELCOME</h3>
+
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div
+              class="form-group has-feedback"
+              [ngClass]="
+                loginForm.valid ? 'validate' : 'form-group has-feedback'
+              "
+            >
+              <input
+                class="form-control"
+                type="text"
+                id="username"
+                placeholder="Username"
+                autocomplete="off"
+                formControlName="username"
+              />
+              <span class="ion ion-person form-control-feedback"></span>
+            </div>
+            <div
+              class="form-group has-feedback"
+              [ngClass]="
+                loginForm.valid ? 'validate' : 'form-group has-feedback'
+              "
+            >
+              <input
+                class="form-control"
+                type="password"
+                id="password"
+                placeholder="Password"
+                formControlName="password"
+              />
+              <span class="ion ion-locked form-control-feedback"></span>
+            </div>
+
+            <div
+              class="form-group has-feedback"
+              [ngClass]="
+                loginForm.valid ? 'validate' : 'form-group has-feedback'
+              "
+            >
+              <input
+                class="form-control"
+                type="text"
+                id="accesscode"
+                placeholder="AccessCode"
+                formControlName="accesscode"
+              />
+              <span
+                class="ion ion- form-control-feedback"
+                [ngClass]="
+                  loginForm.valid ? 'validate' : 'form-group has-feedback'
+                "
+              ></span>
+            </div>
+            <div class="row">
+              <!-- /.col -->
+              <div class="col-12 text-center">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block mb-15"
+                  [disabled]="!loginForm.valid"
+                >
+                  SIGN IN
+                </button>
+              </div>
+              <!-- /.col -->
+
+              <!-- /.col -->
+            </div>
+          </form>
+        </div>
+
+        <!--   <div class="loading-indicator">
+          <mat-spinner *ngIf="showSpinner" mode="indeterminate"></mat-spinner>
+        </div> -->
+        <!-- /.social-auth-links -->
+      </div>
+    </div>
+  </div>
+</section>
