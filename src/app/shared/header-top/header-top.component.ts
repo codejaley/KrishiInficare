@@ -24,7 +24,9 @@ export class HeaderTopComponent implements OnInit {
 
   confirm() {
     if (confirm("Are you sure you want to logout?")) {
-      this.toastr.warning("Please Wait........");
+      this.toastr.warning("Please Wait........", "Logging Out", {
+        timeOut: 2000
+      });
       this.authService.logout().subscribe(
         success => {
           if (success) {

@@ -13,6 +13,7 @@ import { EdituserComponent } from "./edituser/edituser.component";
 import { UserComponent } from "./user.component";
 import { UsermenuComponent } from "./usermenu/usermenu.component";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { UserrolesComponent } from './userroles/userroles.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     CreateuserComponent,
     EdituserComponent,
     UserComponent,
-    UsermenuComponent
+    UsermenuComponent,
+    UserrolesComponent
   ],
   entryComponents: [CreateuserComponent, EdituserComponent],
   imports: [

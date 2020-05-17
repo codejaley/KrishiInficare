@@ -34,7 +34,7 @@
                 id="tableMerchant"
               >
                 <thead>
-                  <button class="btn btn-primary" (click)="addMerchant()">
+                  <button class="btn btn-primary btn-outline" (click)="addMerchant()">
                     Add Merchant
                   </button>
 
@@ -83,7 +83,7 @@
                       <button
                         id="lock"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-danger btn-outline"
                         *ngIf="
                           merchant.block_branch === null ||
                             merchant.block_branch === 'n';
@@ -94,7 +94,11 @@
                       </button>
                     </td>
                     <ng-template #elseBlock2>
-                      <button id="lock" type="button" class="btn btn-success">
+                      <button
+                        id="lock"
+                        type="button"
+                        class="btn btn-success btn-outline"
+                      >
                         Grant
                       </button>
                     </ng-template>
@@ -103,24 +107,27 @@
                         <button
                           id="view"
                           type="button"
-                          class="btn btn-info view"
+                          class="btn btn-info btn-outline view"
                           style="margin-right:16px;"
+                          title="View"
                         >
                           <span class="fa fa-eye " aria-hidden="true"></span>
                         </button>
                         <button
                           id="edit"
                           type="button"
-                          class="btn btn-info edit"
+                          class="btn btn-info edit btn-outline"
                           style="margin-right:16px;"
+                          title="Edit"
                         >
                           <span class="fa fa-edit" aria-hidden="true"></span>
                         </button>
                         <button
                           id="del"
                           type="button"
-                          class="btn btn-info remove"
+                          class="btn btn-info btn-outline remove"
                           style="margin-right:16px;"
+                          title="Delete"
                         >
                           <span class="fa fa-remove" aria-hidden="true"></span>
                         </button>
@@ -131,8 +138,9 @@
                         <button
                           id="user"
                           type="button"
-                          class="btn btn-info user"
+                          class="btn btn-info btn-outline user"
                           style="margin-right:16px;"
+                          title="MerchantUser"
                         >
                           <span class="fa fa-eye " aria-hidden="true"></span>
                         </button>

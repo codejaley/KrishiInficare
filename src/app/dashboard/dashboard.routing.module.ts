@@ -21,6 +21,7 @@ import { EdituserComponent } from "../views/user/edituser/edituser.component";
 import { CreateuserComponent } from "../views/user/createuser/createuser.component";
 import { UserComponent } from "../views/user/user.component";
 import { UsermenuComponent } from "../views/user/usermenu/usermenu.component";
+import { UserrolesComponent } from "../views/user/userroles/userroles.component";
 
 const dashboardroutes: Routes = [
   {
@@ -46,7 +47,8 @@ const dashboardroutes: Routes = [
           { path: "getUsers", component: UserComponent },
 
           { path: "changePassword", component: ChangepasswordComponent },
-          { path: "getUserMenuPrivilege/:id", component: UsermenuComponent }
+          { path: "getUserMenuPrivilege/:id", component: UsermenuComponent },
+          { path: "getUserRoles", component: UserrolesComponent }
 
           //{ path: "**", pathMatch: "full", redirectTo: "/dashboard" }
         ]

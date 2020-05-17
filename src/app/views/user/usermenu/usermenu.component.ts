@@ -58,7 +58,7 @@ export class UsermenuComponent implements OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       searching: false,
-      ordering: false,
+
       paging: false
     };
     this.userLoginId = this.dataRoute.snapshot.paramMap.get("id");
@@ -68,7 +68,6 @@ export class UsermenuComponent implements OnInit {
 
   rerender(): void {
     this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      console.log("rerenderred");
       // Destroy the table first
       dtInstance.destroy();
       // Call the dtTrigger to rerender again
@@ -87,7 +86,7 @@ export class UsermenuComponent implements OnInit {
         this.dtTrigger.next();
       },
       error => {
-        console.log(error.message);
+        console.log(error.error.Message);
       }
     );
   }
@@ -137,8 +136,13 @@ export class UsermenuComponent implements OnInit {
           this.response = data;
           if (this.response["Status Code"] == 0) {
             this.toastr.success(this.response["Message"]);
-
-            this.rerender();
+            this.service
+              .getUsermenuPrvildg(this.userLoginId)
+              .subscribe(data => {
+                this.tableData = data;
+                console.log("going to rerender");
+                this.rerender();
+              });
           }
           if (this.response["Status Code"] == 5000) {
             this.toastr.info(this.response["Message"]);

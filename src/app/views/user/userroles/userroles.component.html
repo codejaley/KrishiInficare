@@ -1,0 +1,98 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>{{ title }}</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#"><i class="fa fa-dashboard"></i> Home</a>
+      </li>
+      <li class="breadcrumb-item active">Edit {{ title }}</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="box">
+          <!-- <div class="box-header with-border">
+                    <h3 class="box-title">{{ title }}</h3>
+                    <h6 class="box-subtitle">List Merchant {{ title }}</h6>
+                  </div> -->
+
+          <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="table-responsive">
+              <table
+                *ngIf="tableData"
+                datatable="ng"
+                [dtOptions]="dtOptions"
+                [dtTrigger]="dtTrigger"
+                class="display"
+                style="width:100%"
+                id="tableUserRoles"
+              >
+                <thead>
+                  <tr>
+                    <th>UserID</th>
+                    <th>Role Name</th>
+                    <th>Role Type</th>
+                    <th>Privilege</th>
+
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let userRole of tableData; index as i">
+                    <td>{{ userRole.role_id }}</td>
+
+                    <td>{{ userRole.role_name }}</td>
+                    <td *ngIf="userRole.role_type === 'a'">
+                      Admin
+                    </td>
+                    <td *ngIf="userRole.role_type === 'c'">
+                      Customer
+                    </td>
+                    <td *ngIf="userRole.role_type === 's'">
+                      Merchant
+                    </td>
+
+                    <td>
+                      <button
+                        id="privi"
+                        type="button"
+                        class="btn btn-primary btn-outline"
+                      >
+                        Privilege
+                      </button>
+                    </td>
+
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          id="del"
+                          type="button"
+                          class="btn btn-info btn-outline remove"
+                          style="margin-right:16px;"
+                        >
+                          <span class="fa fa-remove" aria-hidden="true"></span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>

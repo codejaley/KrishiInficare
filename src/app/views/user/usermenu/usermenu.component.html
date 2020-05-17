@@ -27,9 +27,60 @@
           <div class="box-body">
             <div class="table">
               <form [formGroup]="usermenuForm" (ngSubmit)="submitUsermenu()">
-                <fieldset>
+                <section>
                   <h4>
                     Setup
+
+                    <small
+                      ><span class="badge badge-secondary"
+                        ><button
+                          class="btn btn-outline btn-primary"
+                          type="button"
+                        >
+                          All
+                        </button></span
+                      ></small
+                    >
+                  </h4>
+
+                  <table
+                    *ngIf="tableData"
+                    [dtOptions]="dtOptions"
+                    datatable="ng"
+                    [dtTrigger]="dtTrigger"
+                    class="table display nowrap margin-top-10 no-footer"
+                    style="width:100%"
+                    id="tablesetup"
+                  >
+                    <tbody>
+                      <tr class="row">
+                        <div
+                          *ngFor="let setup of tableData; index as i"
+                          class="col-md-3"
+                        >
+                          <td
+                            width="34%"
+                            *ngIf="setup.main_menu === 'Setup'"
+                            style="display: inline;border: 0em"
+                          >
+                            <mat-checkbox
+                              [checked]="setup.Rights === 0 ? false : true"
+                              [value]="setup.sno"
+                              (change)="onCheckBoxChange($event)"
+                            >
+                            </mat-checkbox>
+                            {{ setup.function_name }}
+                          </td>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+                <br />
+
+                <section>
+                  <h4>
+                    User Menu
 
                     <small
                       ><span class="badge badge-secondary"
@@ -54,84 +105,27 @@
                   >
                     <tbody>
                       <tr class="row">
-                        <div
-                          *ngFor="let setup of tableData; index as i"
-                          class="col-md-3"
-                        >
+                        <div *ngFor="let usermenu of tableData; index as i">
                           <td
-                            width="34%"
-                            *ngIf="setup.main_menu === 'Setup'"
+                            class="col-md-5"
+                            *ngIf="usermenu.main_menu === 'User Menu'"
                             style="display: inline;border: 0em"
                           >
                             <mat-checkbox
-                              [checked]="setup.Rights === 0 ? false : true"
-                              [value]="setup.sno"
+                              [checked]="usermenu.Rights === 0 ? false : true"
+                              [value]="usermenu.sno"
                               (change)="onCheckBoxChange($event)"
                             >
                             </mat-checkbox>
-                            {{ setup.function_name }}
-                            {{ valueList }}
+                            {{ usermenu.function_name }}
                           </td>
                         </div>
                       </tr>
                     </tbody>
                   </table>
-                </fieldset>
-
-                <!--     <fieldset>
-                  <h4>
-                    UserMenu
-
-                    <small
-                      ><span class="badge badge-secondary"
-                        ><button
-                          class="btn btn-outline btn-primary"
-                          type="submit"
-                        >
-                          All
-                        </button></span
-                      ></small
-                    >
-                  </h4>
-
-                  <table
-                    *ngIf="tableData"
-                    datatable="ng"
-                    [dtOptions]="dtOptions"
-                    [dtTrigger]="dtTrigger"
-                    class="table display nowrap margin-top-10 no-footer"
-                    style="width:100%"
-                    id="tableUSermenu"
-                  >
-                    <tbody>
-                      <tr class="row clearfix">
-                        <div
-                          *ngFor="let setup of tableData; index as i"
-                          class="col-md-3 cleafix"
-                        >
-                          <td
-                            width="34%"
-                            class="clearfix"
-                            valign="top"
-                            *ngIf="setup.main_menu === 'User Menu'"
-                            style="display: inline;border: 0em"
-                          >
-                            <mat-checkbox
-                              [checked]="selectAll"
-                              [value]="setup.sno"
-                              (change)="toggle2($event)"
-                              *ngIf="setup.main_menu === 'User Menu'"
-                            >
-                            </mat-checkbox>
-                            {{ setup.function_name }}
-                          </td>
-                        </div>
-                      </tr>
-                    </tbody>
-                  </table>
-                </fieldset>
-
-                <fieldset>
+                </section>
+                <br />
+                <section>
                   <h4>
                     Activity
 
@@ -139,7 +133,7 @@
                       ><span class="badge badge-secondary"
                         ><button
                           class="btn btn-outline btn-primary"
-                          type="submit"
+                          type="button"
                         >
                           All
                         </button></span
@@ -149,42 +143,39 @@
 
                   <table
                     *ngIf="tableData"
-                    datatable="ng"
                     [dtOptions]="dtOptions"
+                    datatable="ng"
                     [dtTrigger]="dtTrigger"
                     class="table display nowrap margin-top-10 no-footer"
                     style="width:100%"
-                    id="tableUSermenu"
+                    id="tableActivity"
                   >
                     <tbody>
-                      <tr class="row clearfix">
+                      <tr class="row">
                         <div
-                          *ngFor="let setup of tableData; index as i"
-                          class="col-md-3 clearfix"
+                          *ngFor="let activity of tableData; index as i"
+                          class="col-md-3"
                         >
                           <td
-                            width="34%"
-                            class="cleafix"
-                            valign="top"
-                            *ngIf="setup.main_menu === 'Activity'"
+                            *ngIf="activity.main_menu === 'Activity'"
                             style="display: inline;border: 0em"
                           >
                             <mat-checkbox
-                              [checked]="selectAll"
-                              [value]="setup.sno"
-                              (change)="toggle2($event)"
-                              *ngIf="setup.main_menu === 'Activity'"
+                              [checked]="activity.Rights === 0 ? false : true"
+                              [value]="activity.sno"
+                              (change)="onCheckBoxChange($event)"
                             >
                             </mat-checkbox>
-                            {{ setup.function_name }}
+                            {{ activity.function_name }}
                           </td>
                         </div>
                       </tr>
                     </tbody>
                   </table>
-                </fieldset>
+                </section>
 
-                <fieldset>
+                <br />
+                <section>
                   <h4>
                     Reports
 
@@ -192,7 +183,7 @@
                       ><span class="badge badge-secondary"
                         ><button
                           class="btn btn-outline btn-primary"
-                          type="submit"
+                          type="button"
                         >
                           All
                         </button></span
@@ -202,40 +193,35 @@
 
                   <table
                     *ngIf="tableData"
-                    datatable="ng"
                     [dtOptions]="dtOptions"
+                    datatable="ng"
                     [dtTrigger]="dtTrigger"
                     class="table display nowrap margin-top-10 no-footer"
                     style="width:100%"
-                    id="tableUSermenu"
+                    id="tableReport"
                   >
                     <tbody>
-                      <tr class="row clearfix">
-                        <div
-                          *ngFor="let setup of tableData; index as i"
-                          class="col-md-3 clearfix"
-                        >
+                      <tr class="row">
+                        <div *ngFor="let report of tableData; index as i">
                           <td
-                            width="34%"
-                            class="cleafix"
-                            valign="top"
-                            *ngIf="setup.main_menu === 'Reports'"
+                            class="col-md-5"
+                            *ngIf="report.main_menu === 'Reports'"
                             style="display: inline;border: 0em"
                           >
                             <mat-checkbox
-                              [checked]="selectAll"
-                              [value]="setup.sno"
-                              (change)="toggle2($event)"
-                              *ngIf="setup.main_menu === 'Reports'"
+                              [checked]="report.Rights === 0 ? false : true"
+                              [value]="report.sno"
+                              (change)="onCheckBoxChange($event)"
                             >
                             </mat-checkbox>
-                            {{ setup.function_name }}
+                            {{ report.function_name }}
                           </td>
                         </div>
                       </tr>
                     </tbody>
                   </table>
-                </fieldset> -->
+                </section>
+
                 <button class="btn btn-outline btn-primary" type="submit">
                   Submit
                 </button>

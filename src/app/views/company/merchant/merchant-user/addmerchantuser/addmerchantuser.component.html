@@ -208,18 +208,7 @@
                 </div>
               </div>
               <!-- /.box-body -->
-              <div class="box-footer">
-                <button
-                  type="button"
-                  class="btn btn-info pull-right"
-                  (click)="activeModal.close('Cross click')"
-                >
-                  Close
-                </button>
-                <button type="submit" class="btn btn-info ">
-                  Submit
-                </button>
-              </div>
+            
               <!-- /.box-footer -->
             </div>
           </ng-template>
@@ -315,18 +304,7 @@
                     </div>
                   </div>
                   <!-- /.box-body -->
-                  <div class="box-footer">
-                    <button
-                      type="button"
-                      class="btn btn-info pull-right"
-                      (click)="activeModal.close('Cross click')"
-                    >
-                      Close
-                    </button>
-                    <button type="submit" class="btn btn-info ">
-                      Submit
-                    </button>
-                  </div>
+                
                   <!-- /.box-footer -->
                 </div>
           </ng-template>
@@ -465,18 +443,7 @@
                   </div>
                   </div>
                   <!-- /.box-body -->
-                  <div class="box-footer">
-                    <button
-                      type="button"
-                      class="btn btn-info pull-right"
-                      (click)="activeModal.close('Cross click')"
-                    >
-                      Close
-                    </button>
-                    <button type="submit" class="btn btn-info">
-                      Submit
-                    </button>
-                  </div>
+             
                   <!-- /.box-footer -->
                 </div>
           </ng-template>
@@ -619,18 +586,7 @@
                     </div>
                   </div>
                   <!-- /.box-body -->
-                  <div class="box-footer">
-                    <button
-                      type="button"
-                      class="btn btn-info pull-right"
-                      (click)="activeModal.close('Cross click')"
-                    >
-                      Close
-                    </button>
-                    <button type="submit" class="btn btn-info ">
-                      Submit
-                    </button>
-                  </div>
+               
                   <!-- /.box-footer -->
                 </div>
           </ng-template>
@@ -666,18 +622,7 @@
                       </div>
                     </div>
                     <!-- /.box-body -->
-                    <div class="box-footer">
-                      <button
-                        type="button"
-                        class="btn btn-info pull-right"
-                        (click)="activeModal.close('Cross click')"
-                      >
-                        Close
-                      </button>
-                      <button type="submit" class="btn btn-info ">
-                        Submit
-                      </button>
-                    </div>
+               
                     <!-- /.box-footer -->
                   </div>
             </ng-template>
@@ -688,6 +633,19 @@
 
 
       <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+      <div class="box-footer">
+          <button
+            type="button"
+            class="btn btn-info btn-outline pull-right"
+            (click)="activeModal.close('Cross click')"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-info btn-outline">
+            Submit
+          </button>
+        </div>
       
     </form> 
    

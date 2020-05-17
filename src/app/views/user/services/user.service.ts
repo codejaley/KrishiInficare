@@ -13,6 +13,14 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
+  //accounts
+
+  updatePassword(formData: password) {
+    return this.http.post<password>(this.rootURL + "/ChangePassword", formData);
+  }
+
+  //userCRUD
+
   getUsers(): Observable<User> {
     return this.http.get<User>(this.userURl + "/GetUsers");
   }
@@ -29,9 +37,6 @@ export class UserService {
     return this.http.post<User>(this.userURl + "/EditUser", formdata);
   }
 
-  updatePassword(formData: password) {
-    return this.http.post<password>(this.rootURL + "/ChangePassword", formData);
-  }
   insertUser(formdata: User) {
     return this.http.post<User>(this.userURl + "/AddUser", formdata);
   }
@@ -43,6 +48,8 @@ export class UserService {
   lockUser(data: sno) {
     return this.http.post<sno>(this.userURl + "/LockUser", data);
   }
+
+  //menu priviledges
 
   getUsermenuPrvildg(userLoginId): Observable<any> {
     let params = new HttpParams();
@@ -57,5 +64,10 @@ export class UserService {
       this.userURl + "/EditUserPriviliges",
       formdata
     );
+  }
+
+  //roles
+  getUserRoles(): Observable<any> {
+    return this.http.get<any>(this.userURl + "/GetUserRoles");
   }
 }

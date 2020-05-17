@@ -25,8 +25,6 @@
           <!-- /.box-header -->
           <div class="box-body">
             <div class="table-responsive">
-              
-
               <table
                 *ngIf="tableData"
                 datatable="ng"
@@ -37,10 +35,12 @@
                 id="table2"
               >
                 <thead>
-				
-				<button class="btn btn-primary" (click)="openDialog()">
-                Add {{ title }}
-              </button>
+                  <button
+                    class="btn btn-primary btn-outline"
+                    (click)="openDialog()"
+                  >
+                    Add {{ title }}
+                  </button>
                   <tr>
                     <th [style.display]="'none'">ID</th>
                     <th>SNO</th>
@@ -78,14 +78,18 @@
                       <button
                         id="lock"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-danger btn-outline"
                         *ngIf="person.Accessed === 'Granted'; else elseBlock2"
                       >
                         Click to Block
                       </button>
                     </td>
                     <ng-template #elseBlock2>
-                      <button id="lock" type="button" class="btn btn-success">
+                      <button
+                        id="lock"
+                        type="button"
+                        class="btn btn-success btn-outline"
+                      >
                         Click to Grant
                       </button>
                     </ng-template>
@@ -93,8 +97,9 @@
                       <div class="btn-group">
                         <button
                           type="button"
-                          class="btn btn-info view"
+                          class="btn btn-info btn-outline view"
                           style="margin-right:16px;"
+                          title="view"
                         >
                           <span
                             class="glyphicon glyphicon-eye-open "
@@ -103,8 +108,9 @@
                         </button>
                         <button
                           type="button"
-                          class="btn btn-info edit"
+                          class="btn btn-info btn-outline edit"
                           style="margin-right:16px;"
+                          title="edit"
                         >
                           <span
                             class="glyphicon  glyphicon glyphicon-info-sign"
@@ -113,8 +119,9 @@
                         </button>
                         <button
                           type="button"
-                          class="btn btn-info remove"
+                          class="btn btn-info btn-outline remove"
                           style="margin-right:16px;"
+                          title="delete"
                         >
                           <span
                             class="glyphicon  glyphicon glyphicon-remove"
@@ -127,8 +134,9 @@
                       <div class="btn-group">
                         <button
                           type="button"
-                          class="btn btn-info detail"
+                          class="btn btn-info btn-outline detail"
                           style="margin-right:16px;"
+                          title="Merchants"
                         >
                           <span
                             class="glyphicon glyphicon-eye-open "
