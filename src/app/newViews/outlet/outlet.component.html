@@ -1,0 +1,146 @@
+<div class="box-header with-border">
+  <h3 class="box-title">
+    <small>{{ title }}</small>
+  </h3>
+
+  <div class="box-tools pull-right">
+    <button
+      type="button"
+      class="btn btn-box-tool"
+      data-widget="collapse"
+      data-toggle="tooltip"
+      title=""
+      data-original-title="Collapse"
+    >
+      <i class="fa fa-minus"></i>
+    </button>
+    <button
+      type="button"
+      class="btn btn-box-tool"
+      data-widget="remove"
+      data-toggle="tooltip"
+      title=""
+      data-original-title="Remove"
+    >
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+</div>
+
+<div class="box-body clearfix" style="background: #f4f6f9;">
+  <div class="row">
+    <div class="table-responsive">
+      <table
+        *ngIf="tableData"
+        datatable="ng"
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="display"
+        style="width:100%"
+        id="tableoutlet"
+      >
+        <thead>
+          <tr>
+            <th [style.display]="'none'">outletID</th>
+            <th [style.display]="'none'">vendorID</th>
+            <th>SNO</th>
+
+            <th>Name</th>
+
+            <th>Adress</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Contact Person</th>
+            <th>Mobile No</th>
+            <th>Email</th>
+            <th>Branch Code</th>
+            <th>Acoount No</th>
+            <th>Cat id</th>
+            <th>E/D Fg</th>
+            <th>Actions</th>
+            <th>Outlet User</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let outlet of tableData; index as i">
+            <td [style.display]="'none'">{{ outlet.Outlet_ID }}</td>
+            <td [style.display]="'none'">{{ outlet.Vendor_ID }}</td>
+            <td>{{ i + 1 }}</td>
+            <td>{{ outlet.Outlet_Name }}</td>
+            <td>{{ outlet.Outlet_Address }}</td>
+
+            <td>{{ outlet.Outlet_City }}</td>
+            <td>{{ outlet.Outlet_State }}</td>
+            <td>{{ outlet.Key_Contact_Person }}</td>
+            <td>{{ outlet.Mobile_Number }}</td>
+            <td>{{ outlet.Outlet_Email_ID }}</td>
+            <td>{{ outlet.Bank_Branch_Code }}</td>
+            <td>{{ outlet.Bank_Account_Number }}</td>
+            <td>{{ outlet.Category_ID }}</td>
+            <td>{{ outlet.Enable_Disable_FG }}</td>
+
+            <td>
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn btn-info btn-outline qrcode"
+                  id="qrcode"
+                  style="margin-right:16px;"
+                  title="delete"
+                >
+                  <span
+                    class="glyphicon glyphicon-qrcode"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-info btn-outline edit"
+                  id="edit"
+                  style="margin-right:16px;"
+                  title="edit"
+                >
+                  <span
+                    class="glyphicon glyphicon-info-sign"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-info btn-outline remove"
+                  id="del"
+                  style="margin-right:16px;"
+                  title="delete"
+                >
+                  <span
+                    class="glyphicon glyphicon-remove"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
+            </td>
+
+            <td>
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn btn-info btn-outline outlet"
+                  id="outlet"
+                  style="margin-right:16px;"
+                  title="outlet"
+                  (click)="navigateOutlet()"
+                >
+                  <span
+                    class="glyphicon glyphicon-chevron-right"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- /.box-body -->

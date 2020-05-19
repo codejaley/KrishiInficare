@@ -22,6 +22,9 @@ import { CreateuserComponent } from "../views/user/createuser/createuser.compone
 import { UserComponent } from "../views/user/user.component";
 import { UsermenuComponent } from "../views/user/usermenu/usermenu.component";
 import { UserrolesComponent } from "../views/user/userroles/userroles.component";
+import { CustomerComponent } from "../newViews/customer/customer.component";
+import { VendorComponent } from "../newViews/vendor/vendor.component";
+import { OutletComponent } from "../newViews/outlet/outlet.component";
 
 const dashboardroutes: Routes = [
   {
@@ -36,6 +39,10 @@ const dashboardroutes: Routes = [
           { path: "page1", component: Page1Component },
           { path: "page2", component: Page2Component },
           { path: "", component: DefaultviewComponent },
+          { path: "customer", component: CustomerComponent },
+          { path: "vendor", component: VendorComponent },
+          { path: "vendor/:id", component: OutletComponent },
+
           { path: "activity", component: ActivityComponent },
           { path: "company", component: CompanyComponent },
           { path: "branch", component: BranchComponent },

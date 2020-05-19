@@ -12,7 +12,7 @@ import { BranchService } from "./services/branch.service";
 export class BranchComponent implements OnInit {
   @ViewChild(DataTableDirective, { static: false })
   datatableElement: DataTableDirective;
-  title = "branch";
+  title = "Branch";
   showSpinner: boolean = true;
 
   tableData: Branch;

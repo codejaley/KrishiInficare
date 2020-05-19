@@ -4,6 +4,17 @@ import { CommonModule } from "@angular/common";
 //custom modeuls layout includes header,sidebar,footer
 import { SharedModule } from "../shared/shared.module";
 
+//customer Module
+import { CustomerModule } from "../newViews/customer/modules/customer.module";
+
+//vendor
+import { VendorModule } from "../newViews/vendor/modules/vendor.module";
+
+//outlet
+import { OutletModule } from "../newViews/outlet/modules/outlet.module";
+
+//outletuser
+import { OutletuserModule } from "../newViews/outletuser/modules/outletuser.module";
 //activity module
 import { ActivityModule } from "../views/activity/activity.module";
 
@@ -46,7 +57,10 @@ import { DefaultviewModule } from "./defaultview/defaultview.module";
     MerchantModule,
     MerchantuserModule,
     UserModule,
-    DefaultviewModule
+    DefaultviewModule,
+    CustomerModule,
+    VendorModule,
+    OutletModule
   ],
   exports: []
 })

@@ -1,0 +1,281 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add Customer</h4>
+
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="loading-indicator">
+    <mat-spinner *ngIf="showSpinner" mode="indeterminate"></mat-spinner>
+  </div>
+  <form [formGroup]="addcustomerForm" (ngSubmit)="addCustomer()">
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <h5>Name <span class="text-danger">*</span></h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="Customer_Name"
+              aria-invalid="false"
+            />
+
+            <div *ngIf="f.Customer_Name.touched && f.Customer_Name.invalid">
+              <div
+                *ngIf="f.Customer_Name.errors.required"
+                class="alert alert-danger"
+              >
+                <small>Name is required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Address <span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Customer_Address"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Customer_Address.touched && f.Customer_Address.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Customer_Address.errors.required">
+                  <small> Address is required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <h5>City<span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Customer_City"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Customer_City.touched && f.Customer_City.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Customer_City.errors.required">
+                  <small>Address is required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <h5>State<span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Customer_State"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Customer_State.touched && f.Customer_State.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Customer_State.errors.required">
+                  <small>State is required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Mobile No<span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Mobile_Number"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Mobile_Number.touched && f.Mobile_Number.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Mobile_Number.errors.pattern">
+                  <small> Please enter numeric value</small>
+                </div>
+                <div *ngIf="f.Mobile_Number.errors.minlength">
+                  <small> Phone should be of minlength 10</small>
+                </div>
+
+                <div *ngIf="f.Mobile_Number.errors.required">
+                  <small> Phone is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Email</h5>
+            <div class="controls">
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Customer_Email_ID"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="
+                  f.Customer_Email_ID.touched && f.Customer_Email_ID.invalid
+                "
+                class="help-block"
+              >
+                <div *ngIf="f.Customer_Email_ID.errors.email">
+                  <small> Email required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h5>Loan Approval</h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="Loan_Approval_ID"
+              aria-invalid="false"
+            />
+          </div>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+          <h5>Bank Branch Code<span class="text-danger">*</span></h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="Bank_Branch_Code"
+              aria-invalid="false"
+            />
+            <div
+              *ngIf="f.Bank_Branch_Code.touched && f.Bank_Branch_Code.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.Bank_Branch_Code.errors.required">
+                <small>Code is required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <h5>Bank Account No<span class="text-danger">*</span></h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="Bank_Account_Number"
+              aria-invalid="false"
+            />
+            <div
+              *ngIf="
+                f.Bank_Account_Number.touched && f.Bank_Account_Number.invalid
+              "
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.Bank_Account_Number.errors.required">
+                <small> Code is required</small>
+              </div>
+              <div *ngIf="f.Bank_Account_Number.errors.minlength">
+                <small> Minlength is 10.</small>
+              </div>
+              <div *ngIf="f.Bank_Account_Number.errors.pattern">
+                <small> Numbers only.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="controls" [style.display]="'none'">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="QR_Code_ID"
+              aria-invalid="false"
+            />
+          </div>
+          <h5>Enable Finger Print<span class="text-danger">*</span></h5>
+          <div class="controls">
+            <select
+              class="form-control col-md-5"
+              required
+              formControlName="Enable_Disable_FG"
+            >
+              <option value="y" selected="selected">Yes</option>
+              <option value="n">No</option>
+            </select>
+            <div
+              *ngIf="f.Enable_Disable_FG.touched && f.Enable_Disable_FG.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.Enable_Disable_FG.errors.required">
+                <small>Required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.col -->
+    </div>
+    <div class="modal-footer">
+      <button
+        type="submit"
+        class="btn btn-info btn-outline"
+        [disabled]="!addcustomerForm.valid"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        class="btn btn-info btn-outline"
+        (click)="activeModal.close('Cross click')"
+      >
+        Close
+      </button>
+    </div>
+  </form>
+</div>

@@ -35,7 +35,8 @@ export class AuthService {
         mapTo(true),
         catchError(error => {
           if (error) {
-            this.toastr.warning(error.name, error.message);
+            console.log(error);
+            this.toastr.warning(error.name, "Invalid Username or password");
           } else {
             return of(false);
           }

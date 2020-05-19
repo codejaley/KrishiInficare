@@ -1,8 +1,8 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      Dashboard
-      <small>{{ title }}</small>
+      {{ title }}
+      <small></small>
     </h1>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -34,7 +34,10 @@
                 id="tableMerchant"
               >
                 <thead>
-                  <button class="btn btn-primary btn-outline" (click)="addMerchant()">
+                  <button
+                    class="btn btn-primary btn-outline"
+                    (click)="addMerchant()"
+                  >
                     Add Merchant
                   </button>
 
