@@ -3,6 +3,4 @@
 Login-logot
 USer Managemnet
 
-<p>DEVELOPED BY ANJAL KARKI
 
-</p>
