@@ -12,12 +12,13 @@ import {
 import { Subject } from "rxjs";
 import { DataTableDirective } from "angular-datatables";
 import { NgbModal, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { Vendor } from "./service/vendor.model";
+import { Vendor, id } from "./service/vendor.model";
 import { VendorService } from "./service/vendor.service";
 
 import { ToastrService } from "ngx-toastr";
 
 import { Router } from "@angular/router";
+import { AddvendorComponent } from "./addvendor/addvendor.component";
 
 @Component({
   selector: "app-vendor",
@@ -73,13 +74,13 @@ export class VendorComponent implements OnInit {
 
         $("td #del", row).unbind("click");
         $("td #del", row).bind("click", () => {
-          self.deleteCustomer(data);
+          self.deleteVendor(data);
           return row;
         });
 
         $("td #edit", row).unbind("click");
         $("td #edit", row).bind("click", () => {
-          self.editCustomer(data);
+          self.editVendor(data);
           return row;
         });
 
@@ -105,11 +106,56 @@ export class VendorComponent implements OnInit {
     });
   }
 
-  deleteCustomer(data) {}
+  addVendor() {
+    const modalRef = this.dialog.open(AddvendorComponent);
+    this.status = modalRef.componentInstance.event.subscribe(res => {
+      this.status = res.data;
+      if (this.status == "Success") {
+        this.dataService.getVendorlist().subscribe(data => {
+          this.showSpinner = false;
 
-  deleteItem() {}
+          this.tableData = data;
+          this.rerender();
+        });
+      }
+    });
+  }
 
-  editCustomer(data) {
+  deleteVendor(data) {
+    var data1 = new id();
+    data1.id = data[0];
+    this.deleteItem(data1);
+  }
+
+  deleteItem(id: id) {
+    if (confirm("Are you sure?")) {
+      this.dataService
+        .deleteVendor(id)
+        .toPromise()
+        .then(
+          data2 => {
+            this.response = data2;
+            if (this.response["Status"] !== "Success") {
+              this.toastr.info(this.response["message"]);
+            } else {
+              this.dataService.getVendorlist().subscribe(data => {
+                this.showSpinner = false;
+
+                this.tableData = data;
+                this.rerender();
+                this.toastr.success(this.response["message"]);
+              });
+            }
+          },
+          error => {
+            this.toastr.warning(error.error.Message);
+          }
+        );
+    }
+    return false;
+  }
+
+  editVendor(data) {
     console.log(data, "edit");
   }
 

@@ -9,12 +9,14 @@ import { LoadingSpinnerModule } from "src/app/ui/loading-spinner/loading-spinner
 import { QRCodeModule } from "angularx-qrcode";
 
 import { OutletComponent } from "../outlet.component";
+import { AddoutletComponent } from "../addoutlet/addoutlet.component";
+import { UpdateoutletComponent } from "../updateoutlet/updateoutlet.component";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 
 import { MatProgressSpinnerModule } from "@angular/material";
 
 @NgModule({
-  declarations: [OutletComponent],
+  declarations: [OutletComponent, AddoutletComponent, UpdateoutletComponent],
   imports: [
     CommonModule,
     OutletRoutingModule,

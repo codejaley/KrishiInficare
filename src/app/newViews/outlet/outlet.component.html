@@ -26,7 +26,7 @@
     </button>
   </div>
 </div>
-
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 <div class="box-body clearfix" style="background: #f4f6f9;">
   <div class="row">
     <div class="table-responsive">
@@ -40,10 +40,17 @@
         id="tableoutlet"
       >
         <thead>
+          <button
+            class="btn btn-outline btn-primary"
+            type="submit"
+            (click)="addOutlet()"
+          >
+            Add Outlet
+          </button>
           <tr>
             <th [style.display]="'none'">outletID</th>
             <th [style.display]="'none'">vendorID</th>
-            <th>SNO</th>
+            <th [style.display]="'none'">SNO</th>
 
             <th>Name</th>
 
@@ -56,7 +63,7 @@
             <th>Branch Code</th>
             <th>Acoount No</th>
             <th>Cat id</th>
-            <th>E/D Fg</th>
+            <th>Enable/Disable</th>
             <th>Actions</th>
             <th>Outlet User</th>
           </tr>
@@ -65,7 +72,7 @@
           <tr *ngFor="let outlet of tableData; index as i">
             <td [style.display]="'none'">{{ outlet.Outlet_ID }}</td>
             <td [style.display]="'none'">{{ outlet.Vendor_ID }}</td>
-            <td>{{ i + 1 }}</td>
+            <td [style.display]="'none'">{{ i + 1 }}</td>
             <td>{{ outlet.Outlet_Name }}</td>
             <td>{{ outlet.Outlet_Address }}</td>
 
@@ -77,22 +84,28 @@
             <td>{{ outlet.Bank_Branch_Code }}</td>
             <td>{{ outlet.Bank_Account_Number }}</td>
             <td>{{ outlet.Category_ID }}</td>
-            <td>{{ outlet.Enable_Disable_FG }}</td>
+            <td>
+              <button
+                id="lock"
+                type="button"
+                class="btn btn-success btn-outline"
+                *ngIf="outlet.Enable_Disable_FG === 'n'; else elseBlock2"
+              >
+                Click to Enable
+              </button>
+            </td>
+            <ng-template #elseBlock2>
+              <button
+                id="lock"
+                type="button"
+                class="btn btn-danger btn-outline"
+              >
+                Click to Disable
+              </button>
+            </ng-template>
 
             <td>
               <div class="btn-group">
-                <button
-                  type="button"
-                  class="btn btn-info btn-outline qrcode"
-                  id="qrcode"
-                  style="margin-right:16px;"
-                  title="delete"
-                >
-                  <span
-                    class="glyphicon glyphicon-qrcode"
-                    aria-hidden="true"
-                  ></span>
-                </button>
                 <button
                   type="button"
                   class="btn btn-info btn-outline edit"
@@ -101,7 +114,7 @@
                   title="edit"
                 >
                   <span
-                    class="glyphicon glyphicon-info-sign"
+                    class="glyphicon glyphicon-eye-open"
                     aria-hidden="true"
                   ></span>
                 </button>
@@ -128,7 +141,7 @@
                   id="outlet"
                   style="margin-right:16px;"
                   title="outlet"
-                  (click)="navigateOutlet()"
+                  (click)="navigateOutletuser()"
                 >
                   <span
                     class="glyphicon glyphicon-chevron-right"

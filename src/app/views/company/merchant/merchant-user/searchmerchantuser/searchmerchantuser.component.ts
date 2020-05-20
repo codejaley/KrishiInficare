@@ -5,7 +5,9 @@ import {
   ChangeDetectorRef,
   Input,
   ElementRef,
-  NgZone
+  NgZone,
+  ContentChildren,
+  ViewChildren
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { DataTableDirective } from "angular-datatables";
@@ -43,9 +45,11 @@ declare var $;
 export class SearchmerchantuserComponent implements OnInit {
   @ViewChild("myfilter")
   filter: ElementRef;
+
+  //@ViewChildren(DataTableDirective)
+  datatableElement: DataTableDirective;
   keyupsubscription: Subscription;
   keydownsubscription: Subscription;
-  datatableElement: DataTableDirective;
 
   isDtInitialized: boolean = false;
 

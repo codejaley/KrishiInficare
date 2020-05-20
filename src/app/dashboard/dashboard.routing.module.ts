@@ -25,6 +25,7 @@ import { UserrolesComponent } from "../views/user/userroles/userroles.component"
 import { CustomerComponent } from "../newViews/customer/customer.component";
 import { VendorComponent } from "../newViews/vendor/vendor.component";
 import { OutletComponent } from "../newViews/outlet/outlet.component";
+import { OutletuserComponent } from "../newViews/outletuser/outletuser.component";
 
 const dashboardroutes: Routes = [
   {
@@ -42,6 +43,7 @@ const dashboardroutes: Routes = [
           { path: "customer", component: CustomerComponent },
           { path: "vendor", component: VendorComponent },
           { path: "vendor/:id", component: OutletComponent },
+          { path: "vendor/:id/:uid", component: OutletuserComponent },
 
           { path: "activity", component: ActivityComponent },
           { path: "company", component: CompanyComponent },

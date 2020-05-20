@@ -8,3 +8,6 @@ export class Vendor {
   Vendor_Mobile_Number: string;
   Vendor_Email_ID: string;
 }
+export class id {
+  id: string;
+}

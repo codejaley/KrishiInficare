@@ -1,0 +1,171 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add Outlet</h4>
+
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="loading-indicator">
+    <mat-spinner *ngIf="showSpinner" mode="indeterminate"></mat-spinner>
+  </div>
+  <form [formGroup]="addOutletUserForm" (ngSubmit)="addOutletUser()">
+    <div class="row">
+      <div class="col-md-12 col-12">
+        <div class="form-group">
+          <h5>LoginId<span class="text-danger">*</span></h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="Outlet_Login_ID"
+              aria-invalid="false"
+            />
+
+            <div *ngIf="f.Outlet_Login_ID.touched && f.Outlet_Login_ID.invalid">
+              <div
+                *ngIf="f.Outlet_Login_ID.errors.required"
+                class="alert alert-danger"
+              >
+                <small>Login Id is required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h5>UserName <span class="text-danger">*</span></h5>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="User_Name"
+              aria-invalid="false"
+            />
+
+            <div *ngIf="f.User_Name.touched && f.User_Name.invalid">
+              <div
+                *ngIf="f.User_Name.errors.required"
+                class="alert alert-danger"
+              >
+                <small>Name is required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Email</h5>
+            <div class="controls">
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                formControlName="User_Email"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.User_Email.touched && f.User_Email.invalid"
+                class="help-block"
+              >
+                <div *ngIf="f.User_Email.errors.email">
+                  <small> Email required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group">
+            <h5>Mobile No<span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="User_Mobile"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.User_Mobile.touched && f.User_Mobile.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.User_Mobile.errors.pattern">
+                  <small> Please enter numeric value</small>
+                </div>
+                <div *ngIf="f.User_Mobile.errors.minlength">
+                  <small> Phone should be of minlength 7</small>
+                </div>
+                <div *ngIf="f.User_Mobile.errors.maxlength">
+                  <small> Phone should be of maxlength 10</small>
+                </div>
+
+                <div *ngIf="f.User_Mobile.errors.required">
+                  <small> Phone is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group">
+            <h5>IP<span class="text-danger"></span></h5>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="IP"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.IP.touched && f.IP.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.IP.errors.pattern">
+                  <small> Please enter numeric value</small>
+                </div>
+
+                <div *ngIf="f.IP.errors.required">
+                  <small> IP is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+
+      <!-- /.col -->
+    </div>
+    <div class="modal-footer">
+      <button
+        type="submit"
+        class="btn btn-info btn-outline"
+        [disabled]="!addOutletUserForm.valid"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        class="btn btn-info btn-outline"
+        (click)="activeModal.close('Cross click')"
+      >
+        Close
+      </button>
+    </div>
+  </form>
+</div>

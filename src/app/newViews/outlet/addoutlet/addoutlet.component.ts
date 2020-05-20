@@ -1,18 +1,18 @@
 import { Component, OnInit, NgZone, Input, EventEmitter } from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Customer } from "../services/customer.model";
-import { CustomerService } from "../services/customer.service";
+import { OutletService } from "./../service/outlet.service";
+
 import { ToastrService } from "ngx-toastr";
 
 @Component({
-  selector: "app-addcustomer",
-  templateUrl: "./addcustomer.component.html",
-  styleUrls: ["./addcustomer.component.css"]
+  selector: "app-addoutlet",
+  templateUrl: "./addoutlet.component.html",
+  styleUrls: ["./addoutlet.component.css"]
 })
-export class AddcustomerComponent implements OnInit {
-  addcustomerForm: FormGroup;
-  customer2: Customer;
+export class AddoutletComponent implements OnInit {
+  addOutletForm: FormGroup;
+  @Input() vendorid;
   myvar;
   showSpinner: boolean = false;
   response: any;
@@ -22,22 +22,27 @@ export class AddcustomerComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
-    private service: CustomerService,
+    private service: OutletService,
     private toastr: ToastrService,
 
     private zone: NgZone
   ) {}
 
   ngOnInit(): void {
+    console.log(this.vendorid);
+    this.vendorid;
     this.resetForm();
   }
 
   resetForm() {
-    this.addcustomerForm = this.formBuilder.group({
-      Customer_Name: [null, Validators.required],
-      Customer_Address: [null, Validators.required],
-      Customer_City: [null, Validators.required],
-      Customer_State: [null, Validators.required],
+    this.addOutletForm = this.formBuilder.group({
+      Vendor_ID: [this.vendorid],
+      Outlet_Name: [null, Validators.required],
+      Outlet_Address: [null, Validators.required],
+      Outlet_City: [null, Validators.required],
+      Outlet_State: [null, Validators.required],
+      Key_Contact_Person: [null, Validators.compose([Validators.required])],
+      Outlet_Email_ID: [null, Validators.email],
       Mobile_Number: [
         null,
         Validators.compose([
@@ -47,42 +52,37 @@ export class AddcustomerComponent implements OnInit {
           Validators.pattern("[0-9]*")
         ])
       ],
-
-      Customer_Email_ID: [null, Validators.email],
-      Loan_Approval_ID: [null],
-      Bank_Branch_Code: [null, Validators.compose([Validators.required])],
+      Bank_Branch_Code: [null, Validators.required],
       Bank_Account_Number: [
         null,
-        Validators.compose([
-          Validators.minLength(10),
-          Validators.required,
-          Validators.pattern("[0-9]*")
-        ])
+        Validators.compose([Validators.required, Validators.minLength(9)])
       ],
-      QR_Code_ID: [Math.floor(Math.random() * 1000000), Validators.required],
+      Category_ID: [this.vendorid],
       Enable_Disable_FG: ["n"]
     });
   }
 
   get f() {
-    return this.addcustomerForm.controls;
+    return this.addOutletForm.controls;
   }
 
-  addCustomer() {
+  addOutlet() {
     //this.activeModal.close(this.f);
     this.showSpinner = true;
-    if (this.addcustomerForm.invalid) {
+    if (this.addOutletForm.invalid) {
       return;
     }
-    this.service.insertCustomer(this.addcustomerForm.value).subscribe(
+    this.service.insertOutlet(this.addOutletForm.value).subscribe(
       res => {
         this.response = res;
 
         if (this.response["Status"] == "Success") {
           this.triggerEvent("Success");
+
           this.toastr.success(this.response["message"]);
           this.showSpinner = false;
           this.resetForm();
+          this.activeModal.dismiss();
         }
 
         if (this.response["Status"] == "Failure") {
@@ -101,11 +101,4 @@ export class AddcustomerComponent implements OnInit {
   triggerEvent(status: string) {
     this.event.emit({ data: status, res: 200 });
   }
-
-  // reloadPage() {
-  //   // click handler or similar
-  //   this.zone.runOutsideAngular(() => {
-  //     location.reload();
-  //   });
-  // }
 }

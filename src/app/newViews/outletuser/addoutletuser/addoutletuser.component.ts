@@ -1,44 +1,50 @@
 import { Component, OnInit, NgZone, Input, EventEmitter } from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Customer } from "../services/customer.model";
-import { CustomerService } from "../services/customer.service";
+import { OutletUserService } from "../service/outletuser.service";
+import { Outletuser } from "../service/outletuser.model";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
-  selector: "app-addcustomer",
-  templateUrl: "./addcustomer.component.html",
-  styleUrls: ["./addcustomer.component.css"]
+  selector: "app-addoutletuser",
+  templateUrl: "./addoutletuser.component.html",
+  styleUrls: ["./addoutletuser.component.css"]
 })
-export class AddcustomerComponent implements OnInit {
-  addcustomerForm: FormGroup;
-  customer2: Customer;
+export class AddoutletuserComponent implements OnInit {
+  @Input() public outletid;
+  addOutletUserForm: FormGroup;
+
   myvar;
   showSpinner: boolean = false;
   response: any;
   isSubmitted: boolean = false;
-
   public event: EventEmitter<any> = new EventEmitter();
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
-    private service: CustomerService,
-    private toastr: ToastrService,
-
-    private zone: NgZone
+    private service: OutletUserService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
+    this.outletid;
+    console.log(this.outletid);
+
     this.resetForm();
   }
 
   resetForm() {
-    this.addcustomerForm = this.formBuilder.group({
-      Customer_Name: [null, Validators.required],
-      Customer_Address: [null, Validators.required],
-      Customer_City: [null, Validators.required],
-      Customer_State: [null, Validators.required],
-      Mobile_Number: [
+    this.addOutletUserForm = this.formBuilder.group({
+      Outlet_Login_ID: [null, Validators.required],
+      Oultet_User_Pwd: [null],
+      matchedPass: [null],
+      Outlet_ID: [this.outletid],
+      Rights: ["3"],
+      User_Name: [null, Validators.required],
+      Outlet_Name: [null],
+
+      User_Email: [null, Validators.email],
+      User_Mobile: [
         null,
         Validators.compose([
           Validators.required,
@@ -48,41 +54,36 @@ export class AddcustomerComponent implements OnInit {
         ])
       ],
 
-      Customer_Email_ID: [null, Validators.email],
-      Loan_Approval_ID: [null],
-      Bank_Branch_Code: [null, Validators.compose([Validators.required])],
-      Bank_Account_Number: [
-        null,
-        Validators.compose([
-          Validators.minLength(10),
-          Validators.required,
-          Validators.pattern("[0-9]*")
-        ])
-      ],
-      QR_Code_ID: [Math.floor(Math.random() * 1000000), Validators.required],
-      Enable_Disable_FG: ["n"]
+      Enable_Disable_FG: ["n"],
+      Last_Login_TS: "5/20/2020 11:35:12 AM",
+      Created_BY: null,
+      Created_TS: null,
+      Last_Pwd_Change_TS: "5/19/2020 11:40:42 AM",
+      IP: null
     });
   }
 
   get f() {
-    return this.addcustomerForm.controls;
+    return this.addOutletUserForm.controls;
   }
 
-  addCustomer() {
+  addOutletUser() {
     //this.activeModal.close(this.f);
     this.showSpinner = true;
-    if (this.addcustomerForm.invalid) {
+    if (this.addOutletUserForm.invalid) {
       return;
     }
-    this.service.insertCustomer(this.addcustomerForm.value).subscribe(
+    this.service.insertOutletUser(this.addOutletUserForm.value).subscribe(
       res => {
         this.response = res;
 
         if (this.response["Status"] == "Success") {
           this.triggerEvent("Success");
+
           this.toastr.success(this.response["message"]);
           this.showSpinner = false;
           this.resetForm();
+          this.activeModal.dismiss();
         }
 
         if (this.response["Status"] == "Failure") {
@@ -101,11 +102,4 @@ export class AddcustomerComponent implements OnInit {
   triggerEvent(status: string) {
     this.event.emit({ data: status, res: 200 });
   }
-
-  // reloadPage() {
-  //   // click handler or similar
-  //   this.zone.runOutsideAngular(() => {
-  //     location.reload();
-  //   });
-  // }
 }

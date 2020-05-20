@@ -1,1 +1,136 @@
-<p>outletuser works!</p>
+<div class="box-header with-border">
+  <h3 class="box-title">
+    <small>{{ title }}</small>
+  </h3>
+
+  <div class="box-tools pull-right">
+    <button
+      type="button"
+      class="btn btn-box-tool"
+      data-widget="collapse"
+      data-toggle="tooltip"
+      title=""
+      data-original-title="Collapse"
+    >
+      <i class="fa fa-minus"></i>
+    </button>
+    <button
+      type="button"
+      class="btn btn-box-tool"
+      data-widget="remove"
+      data-toggle="tooltip"
+      title=""
+      data-original-title="Remove"
+    >
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+</div>
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+<div class="box-body clearfix" style="background: #f4f6f9;">
+  <div class="row">
+    <div class="table-responsive">
+      <table
+        *ngIf="tableData"
+        datatable="ng"
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="display"
+        style="width:100%"
+        id="tableoutlet"
+      >
+        <thead>
+          <button class="btn btn-primary btn-outline" (click)="addOutletUser()">
+            Add {{ title }}
+          </button>
+          <tr>
+            <th [style.display]="'none'">outletID</th>
+            <th [style.display]="'none'">outletUserID</th>
+
+            <th>SNO</th>
+            <th>User Login Id</th>
+            <th>Name</th>
+            <th [style.display]="'none'">Outlet Name</th>
+
+            <th>Email</th>
+            <th>Mobile No</th>
+
+            <th>Enable/Disable</th>
+
+            <th>Last Login</th>
+            <th>Last Password</th>
+            <th [style.display]="'none'">IP</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let outletuser of tableData; index as i">
+            <td [style.display]="'none'">{{ outletuser.Outlet_ID }}</td>
+            <td [style.display]="'none'">{{ outletuser.Outlet_User_ID }}</td>
+
+            <td>{{ i + 1 }}</td>
+            <td>{{ outletuser.Outlet_Login_ID }}</td>
+            <td>{{ outletuser.User_Name }}</td>
+
+            <td [style.display]="'none'">{{ outletuser.Outlet_Name }}</td>
+            <td>{{ outletuser.User_Email }}</td>
+            <td>{{ outletuser.User_Mobile }}</td>
+            <td>
+              <button
+                id="lock"
+                type="button"
+                class="btn btn-success btn-outline"
+                *ngIf="outletuser.Enable_Disable_FG === 'n'; else elseBlock2"
+              >
+                Click to Enable
+              </button>
+            </td>
+            <ng-template #elseBlock2>
+              <button
+                id="lock"
+                type="button"
+                class="btn btn-danger btn-outline"
+              >
+                Click to Disable
+              </button>
+            </ng-template>
+
+            <td>{{ outletuser.Last_Login_TS }}</td>
+            <td>{{ outletuser.Last_Pwd_Change_TS }}</td>
+            <td [style.display]="'none'">{{ outletuser.IP }}</td>
+
+            <td>
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn btn-info btn-outline edit"
+                  id="edit"
+                  style="margin-right:16px;"
+                  title="edit"
+                >
+                  <span
+                    class="glyphicon glyphicon-eye-open"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-info btn-outline remove"
+                  id="del"
+                  style="margin-right:16px;"
+                  title="delete"
+                >
+                  <span
+                    class="glyphicon glyphicon-remove"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- /.box-body -->

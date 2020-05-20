@@ -29,7 +29,7 @@ export class AuthService {
     return this.http
       .post<any>(`${config.apiUrl}/api/Accounts/ValidLogin`, user)
       .pipe(
-        timeout(20000),
+        timeout(8000),
         tap(tokens => this.doLoginUser(user.UserName, tokens)),
 
         mapTo(true),

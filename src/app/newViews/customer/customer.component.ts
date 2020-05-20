@@ -29,7 +29,6 @@ import { QrcodeComponent } from "./qrcode/qrcode.component";
 export class CustomerComponent implements OnInit {
   title = "Customer";
 
-  //@ViewChild("dataTable") table: any;
   @ViewChild(DataTableDirective, { static: false })
   datatableElement: DataTableDirective;
   showSpinner: boolean = true;
@@ -124,10 +123,11 @@ export class CustomerComponent implements OnInit {
   }
 
   generateQr(data) {
-    const modalRef = this.dialog.open(QrcodeComponent);
+    console.log(data);
+    const modalRef = this.dialog.open(QrcodeComponent, { size: "sm" });
 
     modalRef.componentInstance.myAngularxQrCode =
-      data[2] + "," + data[4] + "," + data[6];
+      data[2] + "," + data[4] + "," + data[6] + "," + data[12];
   }
 
   deleteCustomer(data) {
@@ -165,7 +165,20 @@ export class CustomerComponent implements OnInit {
   }
 
   editCustomer(data) {
-    console.log(data, "edit");
+    const modal = this.dialog.open(UpdatecustomerComponent);
+    modal.componentInstance.vendorid = data[0];
+
+    this.status = modal.componentInstance.event.subscribe(res => {
+      this.status = res.data;
+      if (this.status == "Success") {
+        this.dataService.getCustomerlist().subscribe(data => {
+          this.showSpinner = false;
+
+          this.tableData = data;
+          this.rerender();
+        });
+      }
+    });
   }
 
   ngOnDestroy(): void {

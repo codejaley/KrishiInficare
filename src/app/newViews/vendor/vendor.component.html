@@ -1,5 +1,5 @@
 <div class="box-header with-border">
-  <h3 class="box-title"><small>Vendor</small>List</h3>
+  <h3 class="box-title"><small>Vendor</small></h3>
 
   <div class="box-tools pull-right">
     <button
@@ -39,6 +39,9 @@
         id="tablevendor"
       >
         <thead>
+          <button class="btn btn-primary btn-outline" (click)="addVendor()">
+            Add {{ title }}
+          </button>
           <tr>
             <th [style.display]="'none'">Customer ID</th>
             <th>SNO</th>
@@ -72,25 +75,13 @@
               <div class="btn-group">
                 <button
                   type="button"
-                  class="btn btn-info btn-outline qrcode"
-                  id="qrcode"
-                  style="margin-right:16px;"
-                  title="delete"
-                >
-                  <span
-                    class="glyphicon glyphicon-qrcode"
-                    aria-hidden="true"
-                  ></span>
-                </button>
-                <button
-                  type="button"
                   class="btn btn-info btn-outline edit"
                   id="edit"
                   style="margin-right:16px;"
                   title="edit"
                 >
                   <span
-                    class="glyphicon glyphicon-info-sign"
+                    class="glyphicon glyphicon-eye-open"
                     aria-hidden="true"
                   ></span>
                 </button>

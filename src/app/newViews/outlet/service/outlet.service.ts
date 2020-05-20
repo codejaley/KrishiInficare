@@ -19,4 +19,24 @@ export class OutletService {
       params: params
     });
   }
+
+  getOutletDetail(OutletId): Observable<Outlet> {
+    let params = new HttpParams();
+    params = params.append("Outlet_ID", OutletId);
+    return this.http.get<Outlet>(this.rootURL + "/GetOutletDetails", {
+      params: params
+    });
+  }
+
+  updateOutlet(formdata: Outlet) {
+    return this.http.post<Outlet>(this.rootURL + "/EditOutlet", formdata);
+  }
+
+  insertOutlet(formdata: Outlet) {
+    return this.http.post<Outlet>(this.rootURL + "/AddOutlet", formdata);
+  }
+
+  deleteOutlet(id: any) {
+    return this.http.post<Outlet>(this.rootURL + "/DeleteOutlet", id);
+  }
 }

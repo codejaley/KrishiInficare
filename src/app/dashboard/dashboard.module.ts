@@ -60,7 +60,8 @@ import { DefaultviewModule } from "./defaultview/defaultview.module";
     DefaultviewModule,
     CustomerModule,
     VendorModule,
-    OutletModule
+    OutletModule,
+    OutletuserModule
   ],
   exports: []
 })

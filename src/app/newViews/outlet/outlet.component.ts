@@ -14,10 +14,11 @@ import { DataTableDirective } from "angular-datatables";
 import { NgbModal, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 import { OutletService } from "./service/outlet.service";
-
+import { Outlet, id } from "./service/outlet.model";
 import { ToastrService } from "ngx-toastr";
 
 import { Router, ActivatedRoute } from "@angular/router";
+import { AddoutletComponent } from "./addoutlet/addoutlet.component";
 
 @Component({
   selector: "app-outlet",
@@ -75,27 +76,27 @@ export class OutletComponent implements OnInit {
 
         $("td #del", row).unbind("click");
         $("td #del", row).bind("click", () => {
-          self.deleteCustomer(data);
+          self.deleteOutlet(data);
           return row;
         });
 
         $("td #edit", row).unbind("click");
         $("td #edit", row).bind("click", () => {
-          self.editCustomer(data);
+          self.editOutlet(data);
           return row;
         });
 
         $("td #outlet", row).unbind("click");
         $("td #outlet", row).bind("click", () => {
-          self.navigateOutlet(data);
+          self.navigateOutletuser(data);
           return row;
         });
       }
     };
-    this.getDataFromSource1(this.vendor_id);
+    this.getOutletList(this.vendor_id);
   }
 
-  getDataFromSource1(id) {
+  getOutletList(id) {
     this.dataService.getOutletList(id).subscribe(data => {
       this.showSpinner = false;
 
@@ -106,18 +107,64 @@ export class OutletComponent implements OnInit {
       this.dtTrigger.next();
     });
   }
+  addOutlet() {
+    const modalRef = this.dialog.open(AddoutletComponent);
+    modalRef.componentInstance.vendorid = this.vendor_id;
+    this.status = modalRef.componentInstance.event.subscribe(res => {
+      this.status = res.data;
+      if (this.status == "Success") {
+        this.dataService.getOutletList(this.vendor_id).subscribe(data => {
+          this.showSpinner = false;
 
-  deleteCustomer(data) {}
+          this.tableData = data;
+          this.rerender();
+        });
+      }
+    });
+  }
+  deleteOutlet(data) {
+    console.log(data);
+    var data1 = new id();
+    data1.id = data[0];
+    this.deleteItem(data1);
+  }
 
-  deleteItem() {}
+  deleteItem(id: id) {
+    if (confirm("Are you sure?")) {
+      this.dataService
+        .deleteOutlet(id)
+        .toPromise()
+        .then(
+          data2 => {
+            this.response = data2;
+            if (this.response["Status"] !== "Success") {
+              this.toastr.info(this.response["message"]);
+            } else {
+              this.dataService.getOutletList(this.vendor_id).subscribe(data => {
+                this.showSpinner = false;
 
-  editCustomer(data) {
+                this.tableData = data;
+                this.rerender();
+                this.toastr.success(this.response["message"]);
+              });
+            }
+          },
+          error => {
+            this.toastr.warning(error.error.Message);
+          }
+        );
+    }
+    return false;
+  }
+
+  editOutlet(data) {
     console.log(data, "edit");
   }
 
-  navigateOutlet(data) {
-    var id = data[0];
-    this.router.navigate(["dashboard/vendor", id]);
+  navigateOutletuser(data) {
+    var id = this.vendor_id;
+    var uid = data[0];
+    this.router.navigate(["dashboard/vendor", id, uid]);
   }
 
   ngOnDestroy(): void {
