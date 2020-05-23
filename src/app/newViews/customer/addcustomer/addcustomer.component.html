@@ -11,14 +11,11 @@
   </button>
 </div>
 <div class="modal-body">
-  <div class="loading-indicator">
-    <mat-spinner *ngIf="showSpinner" mode="indeterminate"></mat-spinner>
-  </div>
   <form [formGroup]="addcustomerForm" (ngSubmit)="addCustomer()">
     <div class="row">
       <div class="col-md-6 col-12">
         <div class="form-group">
-          <h5>Name <span class="text-danger">*</span></h5>
+          <small>Name <span class="text-danger">*</span></small>
           <div class="controls">
             <input
               type="text"
@@ -42,7 +39,7 @@
 
         <div class="form-group">
           <div class="form-group">
-            <h5>Address <span class="text-danger">*</span></h5>
+            <small>Address <span class="text-danger">*</span></small>
             <div class="controls">
               <input
                 type="text"
@@ -64,7 +61,7 @@
         </div>
         <div class="form-group">
           <div class="form-group">
-            <h5>City<span class="text-danger">*</span></h5>
+            <small>City<span class="text-danger">*</span></small>
             <div class="controls">
               <input
                 type="text"
@@ -86,7 +83,7 @@
         </div>
         <div class="form-group">
           <div class="form-group">
-            <h5>State<span class="text-danger">*</span></h5>
+            <small>State<span class="text-danger">*</span></small>
             <div class="controls">
               <input
                 type="text"
@@ -108,7 +105,7 @@
         </div>
         <div class="form-group">
           <div class="form-group">
-            <h5>Mobile No<span class="text-danger">*</span></h5>
+            <small>Mobile No<span class="text-danger">*</span></small>
             <div class="controls">
               <input
                 type="text"
@@ -142,7 +139,7 @@
       <div class="col-md-6 col-12">
         <div class="form-group">
           <div class="form-group">
-            <h5>Email</h5>
+            <small>Email</small>
             <div class="controls">
               <input
                 type="email"
@@ -165,7 +162,7 @@
           </div>
         </div>
         <div class="form-group">
-          <h5>Loan Approval</h5>
+          <small>Loan Approval</small>
           <div class="controls">
             <input
               type="text"
@@ -178,7 +175,7 @@
         </div>
         <!-- /.form-group -->
         <div class="form-group">
-          <h5>Bank Branch Code<span class="text-danger">*</span></h5>
+          <small>Bank Branch Code<span class="text-danger">*</span></small>
           <div class="controls">
             <input
               type="text"
@@ -200,7 +197,7 @@
         <!-- /.form-group -->
 
         <div class="form-group">
-          <h5>Bank Account No<span class="text-danger">*</span></h5>
+          <small>Bank Account No<span class="text-danger">*</span></small>
           <div class="controls">
             <input
               type="text"
@@ -209,6 +206,7 @@
               formControlName="Bank_Account_Number"
               aria-invalid="false"
             />
+
             <div
               *ngIf="
                 f.Bank_Account_Number.touched && f.Bank_Account_Number.invalid
@@ -228,7 +226,58 @@
           </div>
         </div>
 
-       
+        <div class="form-group">
+          <small>Categories<span class="text-danger">*</span></small>
+          <div class="control">
+            <select
+              multiple="multiple"
+              multi-select
+              formControlName="Categories"
+              class="form-control"
+            >
+              <option value="0" selected disabled>All</option>
+              <option
+                *ngFor="let c of categories"
+                value="{{ c.Category_ID }}"
+                >{{ c.Category_Name }}</option
+              >
+            </select>
+          </div>
+        </div>
+
+      <!--   <div class="form-group">
+          <small>Categories<span class="text-danger">*</span></small>
+          <div class="control">
+            <mat-form-field>
+              <mat-label>Categories</mat-label>
+              <mat-select [formControl]="categoriesformcontrol" multiple >
+                <mat-select-trigger>
+                  {{
+                    categoriesformcontrol.value
+                      ? categoriesformcontrol.value[0]
+                      : ""
+                  }}
+                  <span
+                    *ngIf="categoriesformcontrol.value?.length > 1"
+                    class="example-additional-selection"
+                  >
+                    (+{{ categoriesformcontrol.value.length - 1 }}
+                    {{
+                      categoriesformcontrol.value?.length === 2
+                        ? "other"
+                        : "others"
+                    }})
+                  </span>
+                </mat-select-trigger>
+                <mat-option
+                  *ngFor="let c of categories"
+                  [value]="c.Category_ID"
+                  >{{ c.Category_Name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div> -->
       </div>
       <!-- /.col -->
     </div>

@@ -18,6 +18,7 @@ export class AddoutletuserComponent implements OnInit {
   showSpinner: boolean = false;
   response: any;
   isSubmitted: boolean = false;
+  rights;
   public event: EventEmitter<any> = new EventEmitter();
   constructor(
     public activeModal: NgbActiveModal,
@@ -39,7 +40,7 @@ export class AddoutletuserComponent implements OnInit {
       Oultet_User_Pwd: [null],
       matchedPass: [null],
       Outlet_ID: [this.outletid],
-      Rights: ["3"],
+      Rights: [this.rights],
       User_Name: [null, Validators.required],
       Outlet_Name: [null],
 
@@ -55,10 +56,10 @@ export class AddoutletuserComponent implements OnInit {
       ],
 
       Enable_Disable_FG: ["n"],
-      Last_Login_TS: "5/20/2020 11:35:12 AM",
+      Last_Login_TS: [null],
       Created_BY: null,
       Created_TS: null,
-      Last_Pwd_Change_TS: "5/19/2020 11:40:42 AM",
+      Last_Pwd_Change_TS: [null],
       IP: null
     });
   }

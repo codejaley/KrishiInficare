@@ -1,0 +1,76 @@
+<div class="box-header with-border">
+  <h3 class="box-title">
+    <small>{{ title }}</small>
+  </h3>
+  <ul class="box-controls pull-right">
+    <button class="btn btn-primary btn-outline" (click)="addCategory()">
+      Add {{ title }}
+    </button>
+  </ul>
+</div>
+
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+<div class="box-body clearfix" style="background: #f4f6f9;">
+  <div class="row">
+    <div class="table-responsive">
+      <table
+        *ngIf="tableData"
+        datatable="ng"
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="display"
+        style="width:100%"
+        id="tableCat"
+      >
+        <thead>
+          <tr>
+            <th [style.display]="'none'">Cat ID</th>
+            <th>SNO</th>
+            <th>Name</th>
+            <th>Description</th>
+
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of tableData; index as i">
+            <td [style.display]="'none'">{{ category.Category_ID }}</td>
+            <td>{{ i + 1 }}</td>
+            <td>{{ category.Category_Name }}</td>
+            <td>{{ category.Category_Description }}</td>
+
+            <td>
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn btn-info btn-outline edit"
+                  id="edit"
+                  style="margin-right:16px;"
+                  title="View/Edit"
+                >
+                  <span
+                    class="glyphicon glyphicon-eye-open"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-info btn-outline remove"
+                  id="del"
+                  style="margin-right:16px;"
+                  title="Delete"
+                >
+                  <span
+                    class="glyphicon glyphicon-trash"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- /.box-body -->

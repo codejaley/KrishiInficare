@@ -13,11 +13,16 @@
 <div class="modal-body">
   <div>
     <qrcode
-      [qrdata]="myAngularxQrCode"
+      [qrdata]="qrdata"
       [width]="256"
       [errorCorrectionLevel]="'M'"
       elementType="'img'"
     ></qrcode>
+    <div class="row" class="text-center">
+      <h3>
+        Name : <b>{{ name }}</b>
+      </h3>
+    </div>
   </div>
 </div>
 

@@ -73,7 +73,6 @@ export class LoginComponent implements OnInit {
           }
         },
         error => {
-          this.showSpinner = false;
           console.log(error);
         }
       );

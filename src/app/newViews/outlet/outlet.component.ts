@@ -19,7 +19,8 @@ import { ToastrService } from "ngx-toastr";
 
 import { Router, ActivatedRoute } from "@angular/router";
 import { AddoutletComponent } from "./addoutlet/addoutlet.component";
-
+import { UpdateoutletComponent } from "./updateoutlet/updateoutlet.component";
+import { Location } from "@angular/common";
 @Component({
   selector: "app-outlet",
   templateUrl: "./outlet.component.html",
@@ -50,7 +51,8 @@ export class OutletComponent implements OnInit {
     private zone: NgZone,
     private chRef: ChangeDetectorRef,
     private router: Router,
-    private dataRoute: ActivatedRoute
+    private dataRoute: ActivatedRoute,
+    private _location: Location
   ) {}
 
   rerender(): void {
@@ -68,11 +70,18 @@ export class OutletComponent implements OnInit {
       pagingType: "full_numbers",
       ordering: false,
       pageLength: 10,
+      lengthChange: false,
       stateSave: true,
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         const self = this;
         // Unbind first in order to avoid any duplicate handler
         // (see https://github.com/l-lin/angular-datatables/issues/87)
+
+        $("td #lock", row).unbind("click");
+        $("td #lock", row).bind("click", () => {
+          self.lockOutlet(data);
+          return row;
+        });
 
         $("td #del", row).unbind("click");
         $("td #del", row).bind("click", () => {
@@ -94,6 +103,9 @@ export class OutletComponent implements OnInit {
       }
     };
     this.getOutletList(this.vendor_id);
+  }
+  backClicked() {
+    this._location.back();
   }
 
   getOutletList(id) {
@@ -131,6 +143,9 @@ export class OutletComponent implements OnInit {
 
   deleteItem(id: id) {
     if (confirm("Are you sure?")) {
+      this.toastr.info("Please Wait", "", {
+        timeOut: 1000
+      });
       this.dataService
         .deleteOutlet(id)
         .toPromise()
@@ -158,7 +173,54 @@ export class OutletComponent implements OnInit {
   }
 
   editOutlet(data) {
-    console.log(data, "edit");
+    this.toastr.info("Please Wait", "", {
+      timeOut: 2000
+    });
+    const modal = this.dialog.open(UpdateoutletComponent);
+    modal.componentInstance.vendorid = this.vendor_id;
+    modal.componentInstance.outletid = data[0];
+
+    this.status = modal.componentInstance.event.subscribe(res => {
+      this.status = res.data;
+      if (this.status == "Success") {
+        this.dataService.getOutletList(this.vendor_id).subscribe(data => {
+          this.showSpinner = false;
+
+          this.tableData = data;
+          this.rerender();
+        });
+      }
+    });
+  }
+
+  lockOutlet(data) {
+    var data1 = new id();
+    data1.id = data[0];
+    if (confirm("Are you sure?")) {
+      this.dataService
+        .lockOutlet(data1)
+        .toPromise()
+        .then(
+          data2 => {
+            this.response = data2;
+            if (this.response["Status"] !== "Success") {
+              this.toastr.info(this.response["message"]);
+            } else {
+              this.dataService.getOutletList(this.vendor_id).subscribe(data => {
+                this.showSpinner = false;
+
+                this.tableData = data;
+                this.rerender();
+                this.toastr.success(this.response["message"]);
+              });
+            }
+          },
+          error => {
+            this.toastr.warning(error.error.Message);
+          }
+        );
+    }
+    return false;
   }
 
   navigateOutletuser(data) {

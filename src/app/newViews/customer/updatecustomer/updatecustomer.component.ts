@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  AfterViewInit
+} from "@angular/core";
 import {
   FormGroup,
   FormControl,
@@ -8,38 +14,54 @@ import {
 import { NgbModal, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { CustomerService } from "../services/customer.service";
 import { ToastrService } from "ngx-toastr";
+import { CategoriesService } from "../../categories/services/categories.service";
 @Component({
   selector: "app-updatecustomer",
   templateUrl: "./updatecustomer.component.html",
   styleUrls: ["./updatecustomer.component.css"]
 })
 export class UpdatecustomerComponent implements OnInit {
-  @Input() private vendorid;
+  @Input() private customerid;
   editcustomerForm: FormGroup;
   showSpinner: boolean = false;
   public event: EventEmitter<any> = new EventEmitter();
   data: any;
+  cats: any;
   response: any;
+  categories: any;
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
-
+    private catservice: CategoriesService,
     private service: CustomerService,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.resetForm();
+  }
 
   ngOnInit(): void {
+    this.customerid;
+    this.toastr.clear();
     this.resetForm();
-    this.getCustomerDetail(this.vendorid);
+    this.getCustomerDetail(this.customerid);
+    this.getcat();
+  }
+
+  ngAfterViewInit() {}
+
+  getcat() {
+    this.catservice.getCategorieslist().subscribe(data => {
+      this.categories = data;
+    });
   }
 
   resetForm() {
     this.editcustomerForm = this.formBuilder.group({
-      Customer_ID: [this.vendorid],
-      Customer_Name: [null, Validators.required],
-      Customer_Address: [null, Validators.required],
-      Customer_City: [null, Validators.required],
-      Customer_State: [null, Validators.required],
+      Customer_ID: [this.customerid],
+      Customer_Name: ["", Validators.required],
+      Customer_Address: ["", Validators.required],
+      Customer_City: ["", Validators.required],
+      Customer_State: ["", Validators.required],
       Mobile_Number: [
         null,
         Validators.compose([
@@ -50,9 +72,9 @@ export class UpdatecustomerComponent implements OnInit {
         ])
       ],
 
-      Customer_Email_ID: [null, Validators.email],
-      Loan_Approval_ID: [null],
-      Bank_Branch_Code: [null, Validators.compose([Validators.required])],
+      Customer_Email_ID: ["", Validators.email],
+      Loan_Approval_ID: ["", Validators.required],
+      Bank_Branch_Code: ["", Validators.compose([Validators.required])],
       Bank_Account_Number: [
         null,
         Validators.compose([
@@ -61,15 +83,20 @@ export class UpdatecustomerComponent implements OnInit {
           Validators.pattern("[0-9]*")
         ])
       ],
-      QR_Code_ID: ["1", Validators.required],
-      Enable_Disable_FG: ["", Validators.required]
+
+      Account_Verify_TS: null,
+      Account_Verify_Status: null,
+      Categories: null,
+      Enable_Disable_FG: [null]
     });
   }
 
-  getCustomerDetail(agentBranchCode: string) {
-    this.service.getCustomerDetail(this.vendorid).subscribe(
+  getCustomerDetail(id: string) {
+    this.service.getCustomerDetail(id).subscribe(
       res => {
-        this.data = res;
+        this.data = res["result"];
+        this.cats = res["categories"];
+        console.log(this.cats);
       },
       error => {
         console.log(error);
@@ -86,6 +113,7 @@ export class UpdatecustomerComponent implements OnInit {
     if (this.editcustomerForm.invalid) {
       return;
     }
+
     this.service.updateCustomer(this.editcustomerForm.value).subscribe(
       res => {
         this.response = res;

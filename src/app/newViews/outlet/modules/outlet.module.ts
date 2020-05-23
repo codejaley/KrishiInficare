@@ -17,6 +17,7 @@ import { MatProgressSpinnerModule } from "@angular/material";
 
 @NgModule({
   declarations: [OutletComponent, AddoutletComponent, UpdateoutletComponent],
+  entryComponents: [AddoutletComponent, UpdateoutletComponent],
   imports: [
     CommonModule,
     OutletRoutingModule,

@@ -15,7 +15,13 @@ import { OutletModule } from "../newViews/outlet/modules/outlet.module";
 
 //outletuser
 import { OutletuserModule } from "../newViews/outletuser/modules/outletuser.module";
-//activity module
+
+//categoris
+import { CategoriesModule } from "../newViews/categories/modules/categories.module";
+
+//transaction
+import { TransactionModule } from "./../newViews/transaction-reports/modules/transaction.module";
+/* //activity module
 import { ActivityModule } from "../views/activity/activity.module";
 
 //company module
@@ -30,7 +36,7 @@ import { MDXDefaultModule } from "../views/mdxdefault/mdxdefault.module";
 import { MerchantModule } from "../views/company/merchant/merchant.module";
 
 //
-import { MerchantuserModule } from "../views/company/merchant/merchant-user/merchantuser/merchantuser.module";
+import { MerchantuserModule } from "../views/company/merchant/merchant-user/merchantuser/merchantuser.module"; */
 //rouitng modules for dashboard and activity
 import { UserModule } from "./../views/user/user.module";
 import { DashboardRoutingModule } from "../dashboard/dashboard.routing.module";
@@ -41,6 +47,7 @@ import { DashboardComponent } from "./dashboard.component";
 import { Page1Component } from "../views/page1/page1.component";
 import { Page2Component } from "../views/page2/page2.component";
 import { DefaultviewModule } from "./defaultview/defaultview.module";
+import { from } from "rxjs";
 
 //loading spinner
 
@@ -50,18 +57,20 @@ import { DefaultviewModule } from "./defaultview/defaultview.module";
     CommonModule,
     DashboardRoutingModule,
     SharedModule,
-    ActivityModule,
+    /*     ActivityModule,
     CompanyModule,
     BranchModule,
     MDXDefaultModule,
     MerchantModule,
-    MerchantuserModule,
+    MerchantuserModule, */
     UserModule,
     DefaultviewModule,
     CustomerModule,
     VendorModule,
     OutletModule,
-    OutletuserModule
+    OutletuserModule,
+    CategoriesModule,
+    TransactionModule
   ],
   exports: []
 })

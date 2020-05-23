@@ -1,1 +1,193 @@
-<p>updateoutletuser works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">Update Outlet User</h4>
+
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="loading-indicator"></div>
+  <form [formGroup]="editOutletUserForm" (ngSubmit)="updateOutletUser()">
+    <div class="row">
+      <div class="col-md-12 col-12">
+        <div class="form-group">
+          <small>LoginId<span class="text-danger">*</span></small>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="Outlet_Login_ID"
+              [(ngModel)]="formdata.Outlet_Login_ID"
+              aria-invalid="false"
+              readonly
+            />
+
+            <div *ngIf="f.Outlet_Login_ID.touched && f.Outlet_Login_ID.invalid">
+              <div
+                *ngIf="f.Outlet_Login_ID.errors.required"
+                class="alert alert-danger"
+              >
+                <small>Login Id is required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <small>UserName <span class="text-danger">*</span></small>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="User_Name"
+              [(ngModel)]="formdata.User_Name"
+              aria-invalid="false"
+            />
+
+            <div *ngIf="f.User_Name.touched && f.User_Name.invalid">
+              <div
+                *ngIf="f.User_Name.errors.required"
+                class="alert alert-danger"
+              >
+                <small>Name is required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <div class="form-group">
+            <small>Email</small>
+            <div class="controls">
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                formControlName="User_Email"
+                [(ngModel)]="formdata.User_Email"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.User_Email.touched && f.User_Email.invalid"
+                class="help-block"
+              >
+                <div *ngIf="f.User_Email.errors.email">
+                  <small> Email required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group">
+            <small>Mobile No<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="User_Mobile"
+                [(ngModel)]="formdata.User_Mobile"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.User_Mobile.touched && f.User_Mobile.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.User_Mobile.errors.pattern">
+                  <small> Please enter numeric value</small>
+                </div>
+                <div *ngIf="f.User_Mobile.errors.minlength">
+                  <small> Phone should be of minlength 7</small>
+                </div>
+                <div *ngIf="f.User_Mobile.errors.maxlength">
+                  <small> Phone should be of maxlength 10</small>
+                </div>
+
+                <div *ngIf="f.User_Mobile.errors.required">
+                  <small> Phone is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <input
+          type="email"
+          class="form-control"
+          autocomplete="off"
+          formControlName="Rights"
+          [(ngModel)]="formdata.Rights"
+          aria-invalid="false"
+          [style.display]="'none'"
+        />
+        <input
+          type="email"
+          class="form-control"
+          autocomplete="off"
+          formControlName="Outlet_Name"
+          [(ngModel)]="formdata.Outlet_Name"
+          aria-invalid="false"
+          [style.display]="'none'"
+        />
+        <input
+          type="email"
+          class="form-control"
+          autocomplete="off"
+          formControlName="IP"
+          [(ngModel)]="formdata.IP"
+          aria-invalid="false"
+          [style.display]="'none'"
+        />
+        <input
+          type="email"
+          class="form-control"
+          autocomplete="off"
+          formControlName="Oultet_User_Pwd"
+          [(ngModel)]="formdata.Oultet_User_Pwd"
+          aria-invalid="false"
+          [style.display]="'none'"
+        />
+        <input
+          type="email"
+          class="form-control"
+          autocomplete="off"
+          formControlName="matchedPass"
+          [(ngModel)]="formdata.matchedPass"
+          aria-invalid="false"
+          [style.display]="'none'"
+        />
+
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+
+      <!-- /.col -->
+    </div>
+    <div class="modal-footer">
+      <button
+        type="submit"
+        class="btn btn-info btn-outline"
+        [disabled]="!editOutletUserForm.valid"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        class="btn btn-info btn-outline"
+        (click)="activeModal.close('Cross click')"
+      >
+        Close
+      </button>
+    </div>
+  </form>
+</div>

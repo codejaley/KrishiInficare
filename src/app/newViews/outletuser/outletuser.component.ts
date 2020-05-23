@@ -19,6 +19,8 @@ import { ToastrService } from "ngx-toastr";
 
 import { Router, ActivatedRoute } from "@angular/router";
 import { AddoutletuserComponent } from "./addoutletuser/addoutletuser.component";
+import { UpdateoutletuserComponent } from "./updateoutletuser/updateoutletuser.component";
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-outletuser",
@@ -52,7 +54,8 @@ export class OutletuserComponent implements OnInit {
     private zone: NgZone,
     private chRef: ChangeDetectorRef,
     private router: Router,
-    private dataRoute: ActivatedRoute
+    private dataRoute: ActivatedRoute,
+    private _location: Location
   ) {}
 
   ngOnInit(): void {
@@ -61,11 +64,18 @@ export class OutletuserComponent implements OnInit {
       pagingType: "full_numbers",
       ordering: false,
       pageLength: 10,
+      lengthChange: false,
       stateSave: true,
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         const self = this;
         // Unbind first in order to avoid any duplicate handler
         // (see https://github.com/l-lin/angular-datatables/issues/87)
+
+        $("td #lock", row).unbind("click");
+        $("td #lock", row).bind("click", () => {
+          self.lockOutletUser(data);
+          return row;
+        });
 
         $("td #del", row).unbind("click");
         $("td #del", row).bind("click", () => {
@@ -81,6 +91,10 @@ export class OutletuserComponent implements OnInit {
       }
     };
     this.getOutletUserList(this.ouletuser_id);
+  }
+
+  backClicked() {
+    this._location.back();
   }
 
   rerender(): void {
@@ -124,14 +138,16 @@ export class OutletuserComponent implements OnInit {
   }
 
   deleteOutletUser(data) {
-    console.log(data);
     var data1 = new id();
-    data1.id = data[0];
+    data1.id = data[1];
     this.deleteItem(data1);
   }
 
   deleteItem(id) {
     if (confirm("Are you sure?")) {
+      this.toastr.info("Please Wait", "", {
+        timeOut: 1000
+      });
       this.dataService
         .deleteOutletUser(id)
         .toPromise()
@@ -160,7 +176,57 @@ export class OutletuserComponent implements OnInit {
     return false;
   }
 
-  editOutletUser(data) {}
+  editOutletUser(data) {
+    const modalRef = this.dialog.open(UpdateoutletuserComponent);
+    modalRef.componentInstance.outletid = this.ouletuser_id;
+    modalRef.componentInstance.outletUserid = data[1];
+
+    this.status = modalRef.componentInstance.event.subscribe(res => {
+      this.status = res.data;
+      if (this.status == "Success") {
+        this.dataService
+          .getOutletUserList(this.ouletuser_id)
+          .subscribe(data => {
+            this.showSpinner = false;
+
+            this.tableData = data;
+            this.rerender();
+          });
+      }
+    });
+  }
+
+  lockOutletUser(data) {
+    var data1 = new id();
+    data1.id = data[1];
+    if (confirm("Are you sure?")) {
+      this.dataService
+        .lockOutletUser(data1)
+        .toPromise()
+        .then(
+          data2 => {
+            this.response = data2;
+            if (this.response["Status"] !== "Success") {
+              this.toastr.info(this.response["message"]);
+            } else {
+              this.dataService
+                .getOutletUserList(this.ouletuser_id)
+                .subscribe(data => {
+                  this.showSpinner = false;
+
+                  this.tableData = data;
+                  this.rerender();
+                  this.toastr.success(this.response["message"]);
+                });
+            }
+          },
+          error => {
+            this.toastr.warning(error.error.Message);
+          }
+        );
+    }
+    return false;
+  }
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event

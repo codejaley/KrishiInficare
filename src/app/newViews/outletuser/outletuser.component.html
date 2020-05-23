@@ -3,28 +3,18 @@
     <small>{{ title }}</small>
   </h3>
 
-  <div class="box-tools pull-right">
+  <ul class="box-controls pull-right">
     <button
-      type="button"
-      class="btn btn-box-tool"
-      data-widget="collapse"
-      data-toggle="tooltip"
-      title=""
-      data-original-title="Collapse"
+      class="btn btn-primary btn-outline"
+      (click)="addOutletUser()"
+      [style.margin-left]="'15px'"
     >
-      <i class="fa fa-minus"></i>
+      Add {{ title }}
     </button>
-    <button
-      type="button"
-      class="btn btn-box-tool"
-      data-widget="remove"
-      data-toggle="tooltip"
-      title=""
-      data-original-title="Remove"
-    >
-      <i class="fa fa-times"></i>
+    <button class="btn btn-primary btn-outline" (click)="backClicked()">
+      Go Back
     </button>
-  </div>
+  </ul>
 </div>
 <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 <div class="box-body clearfix" style="background: #f4f6f9;">
@@ -40,9 +30,6 @@
         id="tableoutlet"
       >
         <thead>
-          <button class="btn btn-primary btn-outline" (click)="addOutletUser()">
-            Add {{ title }}
-          </button>
           <tr>
             <th [style.display]="'none'">outletID</th>
             <th [style.display]="'none'">outletUserID</th>
@@ -58,7 +45,7 @@
             <th>Enable/Disable</th>
 
             <th>Last Login</th>
-            <th>Last Password</th>
+            <th>Pwd Chaged</th>
             <th [style.display]="'none'">IP</th>
             <th>Actions</th>
           </tr>
@@ -82,7 +69,7 @@
                 class="btn btn-success btn-outline"
                 *ngIf="outletuser.Enable_Disable_FG === 'n'; else elseBlock2"
               >
-                Click to Enable
+                Enabled
               </button>
             </td>
             <ng-template #elseBlock2>
@@ -91,7 +78,7 @@
                 type="button"
                 class="btn btn-danger btn-outline"
               >
-                Click to Disable
+                Disabled
               </button>
             </ng-template>
 
@@ -121,7 +108,7 @@
                   title="delete"
                 >
                   <span
-                    class="glyphicon glyphicon-remove"
+                    class="glyphicon glyphicon-trash"
                     aria-hidden="true"
                   ></span>
                 </button>

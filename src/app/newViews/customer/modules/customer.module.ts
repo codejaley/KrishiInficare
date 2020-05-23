@@ -14,6 +14,8 @@ import { AddcustomerComponent } from "../addcustomer/addcustomer.component";
 import { UpdatecustomerComponent } from "../updatecustomer/updatecustomer.component";
 import { QrcodeComponent } from "../qrcode/qrcode.component";
 import { MatProgressSpinnerModule } from "@angular/material";
+import { MatSelectModule } from "@angular/material/select";
+import { MatOptionModule } from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { MatProgressSpinnerModule } from "@angular/material";
     LoadingSpinnerModule,
     MatCheckboxModule,
     QRCodeModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatOptionModule
   ]
 })
 export class CustomerModule {}

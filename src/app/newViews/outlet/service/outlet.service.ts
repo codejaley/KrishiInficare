@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Outlet } from "./outlet.model";
+import { Outlet, id } from "./outlet.model";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { config } from "./../../../config";
@@ -9,8 +9,13 @@ import { config } from "./../../../config";
 })
 export class OutletService {
   readonly rootURL = `${config.apiUrl}/api/Outlets`;
+  readonly categoryURL = `${config.apiUrl}/api/Static`;
 
   constructor(private http: HttpClient) {}
+
+  getCategoryList(): Observable<any> {
+    return this.http.get<any>(this.categoryURL + "/GetCategories");
+  }
 
   getOutletList(id) {
     let params = new HttpParams();
@@ -37,6 +42,10 @@ export class OutletService {
   }
 
   deleteOutlet(id: any) {
-    return this.http.post<Outlet>(this.rootURL + "/DeleteOutlet", id);
+    return this.http.post<id>(this.rootURL + "/DeleteOutlet", id);
+  }
+
+  lockOutlet(id: any) {
+    return this.http.post<id>(this.rootURL + "/LockOutlet", id);
   }
 }

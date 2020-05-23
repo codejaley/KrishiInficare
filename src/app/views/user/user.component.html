@@ -42,7 +42,11 @@
       id="tableUser"
     >
       <thead>
-        <button class="btn btn-primary" (click)="openDialog()">
+        <button
+          class="btn btn-primary"
+          (click)="openDialog()"
+          [style.margin-left]="'15px'"
+        >
           Add {{ title }}
         </button>
         <tr>

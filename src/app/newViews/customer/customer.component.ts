@@ -66,11 +66,24 @@ export class CustomerComponent implements OnInit {
       pagingType: "full_numbers",
       ordering: false,
       pageLength: 10,
+      lengthChange: false,
       stateSave: true,
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         const self = this;
         // Unbind first in order to avoid any duplicate handler
         // (see https://github.com/l-lin/angular-datatables/issues/87)
+
+        $("td #verify", row).unbind("click");
+        $("td #verify", row).bind("click", () => {
+          self.verify(data);
+          return row;
+        });
+
+        $("td #lock", row).unbind("click");
+        $("td #lock", row).bind("click", () => {
+          self.lockCustomer(data);
+          return row;
+        });
 
         $("td #qrcode", row).unbind("click");
         $("td #qrcode", row).bind("click", () => {
@@ -125,9 +138,10 @@ export class CustomerComponent implements OnInit {
   generateQr(data) {
     console.log(data);
     const modalRef = this.dialog.open(QrcodeComponent, { size: "sm" });
-
-    modalRef.componentInstance.myAngularxQrCode =
-      data[2] + "," + data[4] + "," + data[6] + "," + data[12];
+    var id = data[0];
+    modalRef.componentInstance.myAngularxQrCode = id;
+    var name2 = data[5];
+    modalRef.componentInstance.name = name2;
   }
 
   deleteCustomer(data) {
@@ -138,6 +152,9 @@ export class CustomerComponent implements OnInit {
 
   deleteItem(id: id) {
     if (confirm("Are you sure?")) {
+      this.toastr.info("Please Wait", "", {
+        timeOut: 10000
+      });
       this.dataService
         .deleteCustomer(id)
         .toPromise()
@@ -145,11 +162,12 @@ export class CustomerComponent implements OnInit {
           data2 => {
             this.response = data2;
             if (this.response["Status"] !== "Success") {
+              this.toastr.clear();
               this.toastr.info(this.response["message"]);
             } else {
               this.dataService.getCustomerlist().subscribe(data => {
                 this.showSpinner = false;
-
+                this.toastr.clear();
                 this.tableData = data;
                 this.rerender();
                 this.toastr.success(this.response["message"]);
@@ -165,8 +183,11 @@ export class CustomerComponent implements OnInit {
   }
 
   editCustomer(data) {
+    this.toastr.info("Please Wait", "", {
+      timeOut: 10000
+    });
     const modal = this.dialog.open(UpdatecustomerComponent);
-    modal.componentInstance.vendorid = data[0];
+    modal.componentInstance.customerid = data[0];
 
     this.status = modal.componentInstance.event.subscribe(res => {
       this.status = res.data;
@@ -181,6 +202,73 @@ export class CustomerComponent implements OnInit {
     });
   }
 
+  lockCustomer(data) {
+    if (confirm("Are you sure?")) {
+      var data1 = new id();
+      data1.id = data[0];
+      this.toastr.info("Please Wait", "", {
+        timeOut: 10000
+      });
+      this.dataService
+        .lockCustomer(data1)
+        .toPromise()
+        .then(
+          data2 => {
+            this.response = data2;
+            if (this.response["Status"] !== "Success") {
+              this.toastr.clear();
+              this.toastr.info(this.response["message"]);
+            } else {
+              this.dataService.getCustomerlist().subscribe(data => {
+                this.showSpinner = false;
+                this.toastr.clear();
+                this.tableData = data;
+                this.rerender();
+                this.toastr.success(this.response["message"]);
+              });
+            }
+          },
+          error => {
+            this.toastr.warning(error.error.Message);
+          }
+        );
+    }
+    return false;
+  }
+
+  verify(data) {
+    var data1 = new id();
+    data1.id = data[0];
+    this.toastr.info("Please Wait", "", {
+      timeOut: 10000
+    });
+    if (data1) {
+      this.dataService
+        .verify(data1)
+        .toPromise()
+        .then(
+          data2 => {
+            this.response = data2;
+            if (this.response["Status"] !== "Success") {
+              this.toastr.clear();
+              this.toastr.error(this.response["message"]);
+            } else {
+              this.dataService.getCustomerlist().subscribe(data => {
+                this.showSpinner = false;
+                this.toastr.clear();
+                this.tableData = data;
+                this.rerender();
+                this.toastr.success(this.response["message"]);
+              });
+            }
+          },
+          error => {
+            this.toastr.warning(error.error.Message);
+          }
+        );
+    }
+    return false;
+  }
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();

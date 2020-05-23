@@ -10,6 +10,9 @@ export class Customer {
   Bank_Account_Number: string;
   QR_Code_ID: string;
   Enable_Disable_FG: string;
+  Account_Verify_TS: string;
+  Account_Verify_Status: string;
+  Categories: string;
 }
 
 export class id {

@@ -66,6 +66,7 @@ export class VendorComponent implements OnInit {
       pagingType: "full_numbers",
       ordering: false,
       pageLength: 10,
+      lengthChange: false,
       stateSave: true,
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         const self = this;
@@ -129,6 +130,9 @@ export class VendorComponent implements OnInit {
 
   deleteItem(id: id) {
     if (confirm("Are you sure?")) {
+      this.toastr.info("Please Wait", "", {
+        timeOut: 1000
+      });
       this.dataService
         .deleteVendor(id)
         .toPromise()

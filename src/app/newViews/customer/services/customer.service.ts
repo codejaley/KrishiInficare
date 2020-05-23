@@ -23,6 +23,13 @@ export class CustomerService {
       params: params
     });
   }
+  getCustomerQr(customerId): Observable<Customer> {
+    let params = new HttpParams();
+    params = params.append("model.id", customerId);
+    return this.http.get<Customer>(this.rootURL + "/GetCustomerQrCode", {
+      params: params
+    });
+  }
 
   updateCustomer(formdata: Customer) {
     return this.http.post<Customer>(this.rootURL + "/EditCustomer", formdata);
@@ -34,5 +41,12 @@ export class CustomerService {
 
   deleteCustomer(id: any) {
     return this.http.post<Customer>(this.rootURL + "/DeleteCustomer", id);
+  }
+
+  lockCustomer(id: any) {
+    return this.http.post<Customer>(this.rootURL + "/LockCustomer", id);
+  }
+  verify(id: any) {
+    return this.http.post<any>(this.rootURL + "/VerifyCustomer", id);
   }
 }

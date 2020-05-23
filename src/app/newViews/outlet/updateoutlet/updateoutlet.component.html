@@ -1,1 +1,316 @@
-<p>updateoutlet works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">Edit Outlet</h4>
+
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <form [formGroup]="editOutletForm" (ngSubmit)="updateOutlet()">
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <small>Name <span class="text-danger">*</span></small>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="Outlet_Name"
+              [(ngModel)]="formdata.Outlet_Name"
+              aria-invalid="false"
+            />
+
+            <div *ngIf="f.Outlet_Name.touched && f.Outlet_Name.invalid">
+              <div
+                *ngIf="f.Outlet_Name.errors.required"
+                class="alert alert-danger"
+              >
+                <small>Name is required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <div class="form-group">
+            <small>Address <span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Outlet_Address"
+                [(ngModel)]="formdata.Outlet_Address"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Outlet_Address.touched && f.Outlet_Address.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Outlet_Address.errors.required">
+                  <small> Address is required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <small>City<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Outlet_City"
+                [(ngModel)]="formdata.Outlet_City"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Outlet_City.touched && f.Outlet_City.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Outlet_City.errors.required">
+                  <small>Address is required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <small>State<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Outlet_State"
+                [(ngModel)]="formdata.Outlet_State"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Outlet_State.touched && f.Outlet_State.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Outlet_State.errors.required">
+                  <small>State is required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <small>Contact Person<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Key_Contact_Person"
+                [(ngModel)]="formdata.Key_Contact_Person"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="
+                  f.Key_Contact_Person.touched && f.Key_Contact_Person.invalid
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Key_Contact_Person.errors.required">
+                  <small> Name is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <small>Mobile No<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Mobile_Number"
+                [(ngModel)]="formdata.Mobile_Number"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Mobile_Number.touched && f.Mobile_Number.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Mobile_Number.errors.pattern">
+                  <small> Please enter numeric value</small>
+                </div>
+                <div *ngIf="f.Mobile_Number.errors.minlength">
+                  <small> Phone should be of minlength 7</small>
+                </div>
+                <div *ngIf="f.Mobile_Number.errors.maxlength">
+                  <small> Phone should be of maxlength 10</small>
+                </div>
+
+                <div *ngIf="f.Mobile_Number.errors.required">
+                  <small> Phone is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="form-group">
+            <small>Email</small>
+            <div class="controls">
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Outlet_Email_ID"
+                [(ngModel)]="formdata.Outlet_Email_ID"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Outlet_Email_ID.touched && f.Outlet_Email_ID.invalid"
+                class="help-block"
+              >
+                <div *ngIf="f.Outlet_Email_ID.errors.email">
+                  <small> Email required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group">
+            <small>Bank Branch Code<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Bank_Branch_Code"
+                [(ngModel)]="formdata.Bank_Branch_Code"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Bank_Branch_Code.touched && f.Bank_Branch_Code.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Bank_Branch_Code.errors.required">
+                  <small> Branch Code is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <small>Account No<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Bank_Account_Number"
+                [(ngModel)]="formdata.Bank_Account_Number"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="
+                  f.Bank_Account_Number.touched && f.Bank_Account_Number.invalid
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Bank_Account_Number.errors.pattern">
+                  <small> Numbers only.</small>
+                </div>
+
+                <div *ngIf="f.Bank_Account_Number.errors.minlength">
+                  <small> Min 7 Digits.</small>
+                </div>
+                <div *ngIf="f.Bank_Account_Number.errors.maxlength">
+                    <small> Max 10 Digits.</small>
+                  </div>
+                <div *ngIf="f.Bank_Account_Number.errors.required">
+                  <small> Required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <small>Category<span class="text-danger">*</span></small>
+            <div class="controls">
+              <select
+                class="form-control"
+                [(ngModel)]="formdata.Category_ID"
+                formControlName="Category_ID"
+              >
+                <option
+                  *ngFor="let c of categories"
+                  [value]="c.Category_ID"
+                  [selected]="
+                    formdata.Category_ID === c.Category_ID ? true : false
+                  "
+                  >{{ c.Category_Name }}</option
+                >
+               
+              </select>
+
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Enable_Disable_FG"
+                [(ngModel)]="formdata.Enable_Disable_FG"
+                aria-invalid="false"
+                [style.display]="'none'"
+              />
+              <div
+                *ngIf="f.Category_ID.touched && f.Category_ID.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Category_ID.errors.required">
+                  <small> Required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- /.col -->
+    </div>
+    <div class="modal-footer">
+      <button
+        type="submit"
+        class="btn btn-info btn-outline"
+       
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        class="btn btn-info btn-outline"
+        (click)="activeModal.close('Cross click')"
+      >
+        Close
+      </button>
+    </div>
+  </form>
+</div>

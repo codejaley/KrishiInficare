@@ -19,6 +19,7 @@ import { DashboardModule } from "./dashboard/dashboard.module";
     AppRoutingModule,
     AuthModule,
     ToastrModule.forRoot(),
+
     DashboardModule
   ],
   providers: [CookieService],

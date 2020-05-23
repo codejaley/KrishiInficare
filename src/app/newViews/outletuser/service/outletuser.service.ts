@@ -45,4 +45,8 @@ export class OutletUserService {
   deleteOutletUser(id: any) {
     return this.http.post<Outletuser>(this.rootURL + "/DeleteOutletUser", id);
   }
+
+  lockOutletUser(id: any) {
+    return this.http.post<id>(this.rootURL + "/LockOutletUser", id);
+  }
 }

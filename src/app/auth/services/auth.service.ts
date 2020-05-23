@@ -6,6 +6,7 @@ import { config } from "./../../config";
 import { Tokens } from "../models/tokens";
 import { ToastrService } from "ngx-toastr";
 import { Router, ActivatedRoute } from "@angular/router";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Injectable({
   providedIn: "root"
@@ -14,6 +15,7 @@ export class AuthService {
   private readonly JWT_TOKEN = "JWT_TOKEN";
   private readonly REFRESH_TOKEN = "REFRESH_TOKEN";
   private loggedUser: string;
+
   Response: any;
   constructor(
     private http: HttpClient,
@@ -36,7 +38,7 @@ export class AuthService {
         catchError(error => {
           if (error) {
             console.log(error);
-            this.toastr.warning(error.name, "Invalid Username or password");
+            this.toastr.warning(error.name, error.message);
           } else {
             return of(false);
           }
@@ -97,6 +99,7 @@ export class AuthService {
   private storeJwtToken(jwt: string) {
     if (jwt == null || jwt == undefined) {
       this.toastr.info("SESSION EXPIRED");
+
       this.removeTokens();
       this.router.navigate(["/login"]);
     } else {

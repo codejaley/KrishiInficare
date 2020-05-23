@@ -1,9 +1,22 @@
 import { Component, OnInit, NgZone, Input, EventEmitter } from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl
+} from "@angular/forms";
 import { Customer } from "../services/customer.model";
 import { CustomerService } from "../services/customer.service";
+import { CategoriesService } from "../../categories/services/categories.service";
 import { ToastrService } from "ngx-toastr";
+import {
+  MatSelect,
+  MatFormField,
+  MatLabel,
+  MatSelectTrigger,
+  MatOption
+} from "@angular/material";
 
 @Component({
   selector: "app-addcustomer",
@@ -17,12 +30,16 @@ export class AddcustomerComponent implements OnInit {
   showSpinner: boolean = false;
   response: any;
   isSubmitted: boolean = false;
+  categories: any;
+
+  categoriesformcontrol = new FormControl();
 
   public event: EventEmitter<any> = new EventEmitter();
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
     private service: CustomerService,
+    private catservice: CategoriesService,
     private toastr: ToastrService,
 
     private zone: NgZone
@@ -30,6 +47,7 @@ export class AddcustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetForm();
+    this.getcat();
   }
 
   resetForm() {
@@ -59,7 +77,9 @@ export class AddcustomerComponent implements OnInit {
           Validators.pattern("[0-9]*")
         ])
       ],
-      QR_Code_ID: [Math.floor(Math.random() * 1000000), Validators.required],
+      Account_Verify_TS: null,
+      Account_Verify_Status: null,
+      Categories: null,
       Enable_Disable_FG: ["n"]
     });
   }
@@ -68,26 +88,35 @@ export class AddcustomerComponent implements OnInit {
     return this.addcustomerForm.controls;
   }
 
+  getcat() {
+    this.catservice.getCategorieslist().subscribe(data => {
+      this.categories = data;
+    });
+  }
+
   addCustomer() {
     //this.activeModal.close(this.f);
-    this.showSpinner = true;
+
     if (this.addcustomerForm.invalid) {
       return;
     }
+    /*    var val = this.f.Categories.value.toString();
+    this.f.Categories.setValue(val); */
     this.service.insertCustomer(this.addcustomerForm.value).subscribe(
       res => {
         this.response = res;
 
         if (this.response["Status"] == "Success") {
           this.triggerEvent("Success");
+          this.resetForm();
           this.toastr.success(this.response["message"]);
           this.showSpinner = false;
-          this.resetForm();
+
+          this.activeModal.dismiss();
         }
 
         if (this.response["Status"] == "Failure") {
           this.toastr.warning(this.response["message"]);
-          this.showSpinner = false;
         }
       },
       error => {

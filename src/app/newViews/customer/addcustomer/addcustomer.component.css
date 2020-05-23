@@ -1,13 +1,13 @@
-/* Absolute Center Spinner */
-.loading-indicator {
-  position: fixed;
-  z-index: 999;
-  height: 2em;
-  width: 2em;
-  overflow: show;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+.example-additional-selection {
+  opacity: 0.75 !important;
+  font-size: 0.75em !important;
+}
+
+::ng-deep .cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+  z-index: 99999 !important;
+}
+
+::ng-deep.cdk-overlay-connected-position-bounding-box {
+  z-index: 99999 !important;
 }

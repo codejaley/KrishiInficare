@@ -26,6 +26,8 @@ import { CustomerComponent } from "../newViews/customer/customer.component";
 import { VendorComponent } from "../newViews/vendor/vendor.component";
 import { OutletComponent } from "../newViews/outlet/outlet.component";
 import { OutletuserComponent } from "../newViews/outletuser/outletuser.component";
+import { CategoriesComponent } from "../newViews/categories/categories.component";
+import { TransactionReportsComponent } from "../newViews/transaction-reports/transaction-reports.component";
 
 const dashboardroutes: Routes = [
   {
@@ -44,7 +46,8 @@ const dashboardroutes: Routes = [
           { path: "vendor", component: VendorComponent },
           { path: "vendor/:id", component: OutletComponent },
           { path: "vendor/:id/:uid", component: OutletuserComponent },
-
+          { path: "categories", component: CategoriesComponent },
+          { path: "report", component: TransactionReportsComponent },
           { path: "activity", component: ActivityComponent },
           { path: "company", component: CompanyComponent },
           { path: "branch", component: BranchComponent },

@@ -17,6 +17,8 @@ export class AddoutletComponent implements OnInit {
   showSpinner: boolean = false;
   response: any;
   isSubmitted: boolean = false;
+  categories: any;
+  selectedCatID: any = null;
 
   public event: EventEmitter<any> = new EventEmitter();
   constructor(
@@ -29,9 +31,19 @@ export class AddoutletComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.vendorid);
     this.vendorid;
     this.resetForm();
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.service.getCategoryList().subscribe(
+      data => {
+        console.log(data);
+        this.categories = data;
+      },
+      error => {}
+    );
   }
 
   resetForm() {
@@ -47,7 +59,7 @@ export class AddoutletComponent implements OnInit {
         null,
         Validators.compose([
           Validators.required,
-          Validators.minLength(7),
+          Validators.minLength(9),
           Validators.maxLength(10),
           Validators.pattern("[0-9]*")
         ])
@@ -55,9 +67,13 @@ export class AddoutletComponent implements OnInit {
       Bank_Branch_Code: [null, Validators.required],
       Bank_Account_Number: [
         null,
-        Validators.compose([Validators.required, Validators.minLength(9)])
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(9),
+          Validators.pattern("[0-9]*")
+        ])
       ],
-      Category_ID: [this.vendorid],
+      Category_ID: [this.selectedCatID, Validators.required],
       Enable_Disable_FG: ["n"]
     });
   }
@@ -72,6 +88,7 @@ export class AddoutletComponent implements OnInit {
     if (this.addOutletForm.invalid) {
       return;
     }
+    console.log(this.addOutletForm.value);
     this.service.insertOutlet(this.addOutletForm.value).subscribe(
       res => {
         this.response = res;

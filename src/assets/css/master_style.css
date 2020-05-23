@@ -82,6 +82,17 @@ body {
 	font-size: 13px;
 	color: #67757c;
 }
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index: 9999!important;
+  }
+
+  table.dataTable thead th,
+table.dataTable thead td {
+  padding: 10px 18px;
+  border-bottom: 1px solid #b6bde3 !important;
+}
+
 h1, h2, h3, h4, h5, h6 {
     /*color: #212121;*/
     font-weight: 300;

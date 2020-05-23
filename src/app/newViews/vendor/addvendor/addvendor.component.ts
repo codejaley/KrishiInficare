@@ -69,9 +69,11 @@ export class AddvendorComponent implements OnInit {
 
         if (this.response["Status"] == "Success") {
           this.triggerEvent("Success");
+
           this.toastr.success(this.response["message"]);
           this.showSpinner = false;
           this.resetForm();
+          this.activeModal.dismiss();
         }
 
         if (this.response["Status"] == "Failure") {
