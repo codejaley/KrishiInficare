@@ -7,6 +7,7 @@
     <button
       class="btn btn-primary btn-outline"
       (click)="addOutletUser()"
+      *ngIf="!showSpinner"
       [style.margin-left]="'15px'"
     >
       Add {{ title }}

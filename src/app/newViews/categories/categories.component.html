@@ -3,7 +3,11 @@
     <small>{{ title }}</small>
   </h3>
   <ul class="box-controls pull-right">
-    <button class="btn btn-primary btn-outline" (click)="addCategory()">
+    <button
+      class="btn btn-primary btn-outline"
+      (click)="addCategory()"
+      *ngIf="!showSpinner"
+    >
       Add {{ title }}
     </button>
   </ul>

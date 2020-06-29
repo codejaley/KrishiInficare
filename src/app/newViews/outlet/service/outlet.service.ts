@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Outlet, id } from "./outlet.model";
+import { Outlet, id, AuditOutlet } from "./outlet.model";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { config } from "./../../../config";
@@ -25,6 +25,14 @@ export class OutletService {
     });
   }
 
+  VerifyAccount(acno: any) {
+    return this.http.post<any>(this.rootURL + "/VerifyAccount", acno);
+  }
+
+  updateAccountnumber(data: any) {
+    return this.http.post<any>(this.rootURL + "/ChangeAccount", data);
+  }
+
   getOutletDetail(OutletId): Observable<Outlet> {
     let params = new HttpParams();
     params = params.append("Outlet_ID", OutletId);
@@ -47,5 +55,13 @@ export class OutletService {
 
   lockOutlet(id: any) {
     return this.http.post<id>(this.rootURL + "/LockOutlet", id);
+  }
+
+  getOutletAudit(outletId): Observable<AuditOutlet> {
+    let params = new HttpParams();
+    params = params.append("Outlet_ID", outletId);
+    return this.http.get<AuditOutlet>(this.rootURL + "/GetOutletAudits", {
+      params: params
+    });
   }
 }

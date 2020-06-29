@@ -5,6 +5,7 @@
       class="btn btn-outline btn-primary"
       type="submit"
       (click)="addVendor()"
+      *ngIf="!showSpinner"
       [style.margin-left]="'15px'"
     >
       Add Vendor

@@ -1,1 +1,217 @@
-<p>updatevendor works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">Vendor Detail</h4>
+
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="loading-indicator"></div>
+  <form [formGroup]="editVendorForm" (ngSubmit)="updateVendor()">
+    <div class="row">
+      <div class="col-md-12 col-12">
+        <div class="form-group">
+          <small>Name <span class="text-danger">*</span></small>
+          <div class="controls">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="Vendor_Name"
+              [(ngModel)]="vendorDetail.Vendor_Name"
+              aria-invalid="false"
+            />
+
+            <div *ngIf="f.Vendor_Name.touched && f.Vendor_Name.invalid">
+              <div
+                *ngIf="f.Vendor_Name.errors.required"
+                class="alert alert-danger"
+              >
+                <small>Name is required</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <div class="form-group">
+            <small>Address <span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Vendor_Address"
+                [(ngModel)]="vendorDetail.Vendor_Address"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Vendor_Address.touched && f.Vendor_Address.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Vendor_Address.errors.required">
+                  <small> Address is required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <small>City<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Vendor_City"
+                [(ngModel)]="vendorDetail.Vendor_City"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Vendor_City.touched && f.Vendor_City.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Vendor_City.errors.required">
+                  <small>Address is required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <small>State<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Vendor_State"
+                [(ngModel)]="vendorDetail.Vendor_State"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Vendor_State.touched && f.Vendor_State.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Vendor_State.errors.required">
+                  <small>State is required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <small>Contact Person<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Vendor_Contact_Person"
+                [(ngModel)]="vendorDetail.Vendor_Contact_Person"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="
+                  f.Vendor_Contact_Person.touched &&
+                  f.Vendor_Contact_Person.invalid
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Vendor_Contact_Person.errors.required">
+                  <small> Phone is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <small>Mobile No<span class="text-danger">*</span></small>
+            <div class="controls">
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Vendor_Mobile_Number"
+                [(ngModel)]="vendorDetail.Vendor_Mobile_Number"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="
+                  f.Vendor_Mobile_Number.touched &&
+                  f.Vendor_Mobile_Number.invalid
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.Vendor_Mobile_Number.errors.pattern">
+                  <small> Please enter numeric value</small>
+                </div>
+                <div *ngIf="f.Vendor_Mobile_Number.errors.minlength">
+                  <small> Phone should be of minlength 10</small>
+                </div>
+
+                <div *ngIf="f.Vendor_Mobile_Number.errors.required">
+                  <small> Phone is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <small>Email</small>
+            <div class="controls">
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                formControlName="Vendor_Email_ID"
+                [(ngModel)]="vendorDetail.Vendor_Email_ID"
+                aria-invalid="false"
+              />
+              <div
+                *ngIf="f.Vendor_Email_ID.touched && f.Vendor_Email_ID.invalid"
+                class="help-block"
+              >
+                <div *ngIf="f.Vendor_Email_ID.errors.email">
+                  <small> Email required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+
+      <!-- /.col -->
+    </div>
+    <div class="modal-footer">
+      <button
+        type="submit"
+        class="btn btn-info btn-outline"
+        [disabled]="!editVendorForm.valid"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        class="btn btn-info btn-outline"
+        (click)="activeModal.close('Cross click')"
+      >
+        Close
+      </button>
+    </div>
+  </form>
+</div>

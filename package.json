@@ -26,6 +26,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.0.0",
     "angular-datatables": "^6.0.1",
     "angularx-qrcode": "^2.1.1",
+    "bootstrap-select": "^1.13.17",
     "core-js": "^2.5.4",
     "datatables.net": "^1.10.20",
     "datatables.net-dt": "^1.10.20",

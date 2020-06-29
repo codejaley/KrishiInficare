@@ -11,7 +11,11 @@ import {
 } from "@angular/core";
 import { Subject } from "rxjs";
 import { DataTableDirective } from "angular-datatables";
-import { NgbModal, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbModal,
+  NgbActiveModal,
+  NgbModalRef
+} from "@ng-bootstrap/ng-bootstrap";
 import { Customer, id } from "./services/customer.model";
 import { CustomerService } from "./services/customer.service";
 import { AddcustomerComponent } from "./addcustomer/addcustomer.component";
@@ -20,6 +24,7 @@ import { ToastrService } from "ngx-toastr";
 import { UpdatecustomerComponent } from "./updatecustomer/updatecustomer.component";
 import { Router } from "@angular/router";
 import { QrcodeComponent } from "./qrcode/qrcode.component";
+import { AuthService } from "src/app/auth/services/auth.service";
 
 @Component({
   selector: "app-customer",
@@ -33,7 +38,6 @@ export class CustomerComponent implements OnInit {
   datatableElement: DataTableDirective;
   showSpinner: boolean = true;
 
-  dataTable: any;
   dtOptions: DataTables.Settings = {};
   tableData: Customer;
 
@@ -49,7 +53,8 @@ export class CustomerComponent implements OnInit {
     private toastr: ToastrService,
     private zone: NgZone,
     private chRef: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private as: AuthService
   ) {}
 
   rerender(): void {
@@ -108,29 +113,40 @@ export class CustomerComponent implements OnInit {
   }
 
   getDataFromSource1() {
-    this.dataService.getCustomerlist().subscribe(data => {
-      this.showSpinner = false;
+    this.dataService.getCustomerlist().subscribe(
+      data => {
+        this.showSpinner = false;
 
-      this.tableData = data;
-      console.log(this.tableData);
-      this.chRef.detectChanges();
+        this.tableData = data;
+        console.log(this.tableData);
+        this.chRef.detectChanges();
 
-      this.dtTrigger.next();
-    });
+        this.dtTrigger.next();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   addCustomer() {
-    const modalRef = this.dialog.open(AddcustomerComponent);
+    const modalRef = this.dialog.open(AddcustomerComponent, { size: "lg" });
 
     this.status = modalRef.componentInstance.event.subscribe(res => {
       this.status = res.data;
       if (this.status == "Success") {
-        this.dataService.getCustomerlist().subscribe(data => {
-          this.showSpinner = false;
+        this.dataService.getCustomerlist().subscribe(
+          data => {
+            this.showSpinner = false;
 
-          this.tableData = data;
-          this.rerender();
-        });
+            this.tableData = data;
+            this.rerender();
+          },
+          error => {
+            console.log(error);
+            modalRef.close;
+          }
+        );
       }
     });
   }
@@ -186,7 +202,7 @@ export class CustomerComponent implements OnInit {
     this.toastr.info("Please Wait", "", {
       timeOut: 10000
     });
-    const modal = this.dialog.open(UpdatecustomerComponent);
+    const modal = this.dialog.open(UpdatecustomerComponent, { size: "lg" });
     modal.componentInstance.customerid = data[0];
 
     this.status = modal.componentInstance.event.subscribe(res => {

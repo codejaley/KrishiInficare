@@ -13,9 +13,11 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { AddcustomerComponent } from "../addcustomer/addcustomer.component";
 import { UpdatecustomerComponent } from "../updatecustomer/updatecustomer.component";
 import { QrcodeComponent } from "../qrcode/qrcode.component";
-import { MatProgressSpinnerModule } from "@angular/material";
+import { MatProgressSpinnerModule, MatIconModule } from "@angular/material";
 import { MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { MatButtonModule, MatInputModule } from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -40,7 +42,12 @@ import { MatOptionModule } from "@angular/material";
     QRCodeModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
+    NgbModule
   ]
 })
 export class CustomerModule {}

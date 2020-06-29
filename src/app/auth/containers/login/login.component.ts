@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { ToastrService } from "ngx-toastr";
+import { config } from "rxjs";
 declare var $;
 @Component({
   selector: "app-login",
@@ -34,7 +35,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.toastr.warning("Please Wait .......");
+    this.toastr.warning("Please Wait .......", "", {
+      timeOut: 11000
+    });
     this.showSpinner = true;
 
     this.authService
@@ -46,10 +49,10 @@ export class LoginComponent implements OnInit {
       })
       .subscribe(
         response => {
-          console.log(response);
           this.showSpinner = true;
 
           if (response) {
+            this.toastr.clear();
             this.showSpinner = false;
             // window.location.replace("/mmsV1/dashboard");
 
@@ -64,16 +67,12 @@ export class LoginComponent implements OnInit {
             "Home | Dashboard",
             "/dashboard"
           ); */
-          } else {
-            this.showSpinner = false;
-
-            this.toastr.warning("Invalid Username or Password");
-
-            //this.reloadPage();
           }
         },
         error => {
           console.log(error);
+          this.toastr.clear();
+          this.toastr.warning(error.error.Message, error.status);
         }
       );
   }

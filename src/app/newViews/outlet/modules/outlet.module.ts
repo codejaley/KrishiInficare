@@ -14,7 +14,7 @@ import { UpdateoutletComponent } from "../updateoutlet/updateoutlet.component";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 
 import { MatProgressSpinnerModule } from "@angular/material";
-
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 @NgModule({
   declarations: [OutletComponent, AddoutletComponent, UpdateoutletComponent],
   entryComponents: [AddoutletComponent, UpdateoutletComponent],
@@ -26,7 +26,8 @@ import { MatProgressSpinnerModule } from "@angular/material";
     ReactiveFormsModule,
     LoadingSpinnerModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgbModule
   ]
 })
 export class OutletModule {}

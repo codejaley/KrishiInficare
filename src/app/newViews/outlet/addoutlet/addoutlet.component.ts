@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone, Input, EventEmitter } from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { OutletService } from "./../service/outlet.service";
-
+import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -20,6 +20,16 @@ export class AddoutletComponent implements OnInit {
   categories: any;
   selectedCatID: any = null;
 
+  VerifyAccountForm: FormGroup;
+  responseVerify: any;
+  accountVerified: boolean = false;
+
+  active;
+
+  isDisabled: boolean = false;
+  isDisabled2: boolean = true;
+  isDisabled3: boolean = true;
+
   public event: EventEmitter<any> = new EventEmitter();
   constructor(
     public activeModal: NgbActiveModal,
@@ -32,6 +42,7 @@ export class AddoutletComponent implements OnInit {
 
   ngOnInit(): void {
     this.vendorid;
+    this.resetVerifyAccountForm();
     this.resetForm();
     this.getCategories();
   }
@@ -80,6 +91,55 @@ export class AddoutletComponent implements OnInit {
 
   get f() {
     return this.addOutletForm.controls;
+  }
+
+  resetVerifyAccountForm() {
+    this.VerifyAccountForm = this.formBuilder.group({
+      account_number: [
+        null,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(10),
+
+          Validators.pattern("[0-9]*")
+        ])
+      ]
+    });
+  }
+
+  get f2() {
+    return this.VerifyAccountForm.controls;
+  }
+
+  verifyAccountno() {
+    this.toastr.info("Verifying Please Wait", "", {
+      timeOut: 20000
+    });
+    var name = this.f2.account_number.value;
+    console.log(name);
+    this.service.VerifyAccount(this.VerifyAccountForm.value).subscribe(res => {
+      this.responseVerify = res;
+      console.log(this.responseVerify);
+      if (this.responseVerify["Status"] == "SUCCESS") {
+        this.f.Bank_Account_Number.setValue(name);
+        this.accountVerified = true;
+        this.isDisabled = true;
+        this.isDisabled3 = false;
+        this.toastr.clear();
+        this.toastr.success(this.responseVerify["Message"], "", {
+          timeOut: 1000
+        });
+      }
+      if (
+        this.responseVerify["Status"] == "FAILURE" ||
+        this.responseVerify["Status"] == "Failure"
+      ) {
+        this.toastr.clear();
+        this.accountVerified = false;
+        this.isDisabled = true;
+        this.toastr.warning(this.responseVerify["Message"]);
+      }
+    });
   }
 
   addOutlet() {

@@ -6,6 +6,7 @@
     <button
       class="btn btn-outline btn-primary"
       type="submit"
+      *ngIf="!showSpinner"
       (click)="addOutlet()"
       [style.margin-left]="'15px'"
     >

@@ -9,35 +9,45 @@ import {
 import { AuthService } from "./services/auth.service";
 import { Observable, throwError, BehaviorSubject } from "rxjs";
 import { catchError, filter, take, switchMap } from "rxjs/operators";
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpParams,
-  HttpResponse
-} from "@angular/common/http";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  private isRefreshing = false;
-  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
-    null
-  );
-
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService,
+    public dialog: NgbModal
+  ) {}
 
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     request = request.clone({
-      withCredentials: true
+      withCredentials: true,
+      reportProgress: true
     });
-    if (this.authService.getJwtToken()) {
-      request = this.addToken(request, this.authService.getJwtToken());
-    }
+    /*   if (this.authService.getJwtToken()) {
 
+    } */
+    //request = this.addToken(request);
     return next.handle(request).pipe(
       catchError(error => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
+          if (
+            (error instanceof HttpErrorResponse &&
+              error.status === 401 &&
+              error.statusText == "Session Expired") ||
+            error.statusText == "Invalid Token"
+          ) {
+            sessionStorage.clear();
+            this.toastr.warning(error.statusText, error.status.toString());
+            this.dialog.dismissAll();
+            this.router.navigate(["/login"]);
+          }
           return this.handle401Error(request, next);
         } else {
           return throwError(error);
@@ -46,17 +56,20 @@ export class TokenInterceptor implements HttpInterceptor {
     );
   }
 
-  private addToken(request: HttpRequest<any>, token: string) {
+  /*   private addToken(request: HttpRequest<any>) {
     return request.clone({
       setHeaders: {
-        withCredentials: `true`,
-        Authorization: `Bearer ${token}`
+        //withCredentials: `true`,
+        //Authorization: `Bearer ${token}`,
+        someheader: `testCSRGF`
       }
     });
-  }
+  } */
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (!this.isRefreshing) {
+    return next.handle(request);
+    //this.addToken(request)
+    /*  if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
@@ -64,7 +77,7 @@ export class TokenInterceptor implements HttpInterceptor {
         switchMap((token: any) => {
           this.isRefreshing = false;
           this.refreshTokenSubject.next(token.Token);
-          return next.handle(this.addToken(request, token.Token));
+
         })
       );
     } else {
@@ -75,6 +88,6 @@ export class TokenInterceptor implements HttpInterceptor {
           return next.handle(this.addToken(request, Token));
         })
       );
-    }
+    } */
   }
 }

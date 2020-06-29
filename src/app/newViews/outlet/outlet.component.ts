@@ -113,14 +113,16 @@ export class OutletComponent implements OnInit {
       this.showSpinner = false;
 
       this.tableData = data;
-      console.log(this.tableData);
+
       this.chRef.detectChanges();
 
       this.dtTrigger.next();
     });
   }
   addOutlet() {
-    const modalRef = this.dialog.open(AddoutletComponent);
+    const modalRef = this.dialog.open(AddoutletComponent, {
+      size: "lg"
+    });
     modalRef.componentInstance.vendorid = this.vendor_id;
     this.status = modalRef.componentInstance.event.subscribe(res => {
       this.status = res.data;
@@ -176,7 +178,7 @@ export class OutletComponent implements OnInit {
     this.toastr.info("Please Wait", "", {
       timeOut: 2000
     });
-    const modal = this.dialog.open(UpdateoutletComponent);
+    const modal = this.dialog.open(UpdateoutletComponent, { size: "lg" });
     modal.componentInstance.vendorid = this.vendor_id;
     modal.componentInstance.outletid = data[0];
 

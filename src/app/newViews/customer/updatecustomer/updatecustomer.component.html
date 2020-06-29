@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title">Update Customer</h4>
+  <h4 class="modal-title">Customer Detail</h4>
 
   <button
     type="button"
@@ -11,284 +11,489 @@
   </button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="editcustomerForm" (ngSubmit)="updateCustomer()">
-    <div class="row">
-      <div class="col-md-6 col-12">
-        <div class="form-group">
-          <h5>Name <span class="text-danger">*</span></h5>
-          <div class="controls">
-            <input
-              type="text"
-              class="form-control"
-              autocomplete="off"
-              formControlName="Customer_Name"
-              aria-invalid="false"
-              [(ngModel)]="data.Customer_Name"
-            />
 
-            <div *ngIf="f.Customer_Name.touched && f.Customer_Name.invalid">
-              <div
-                *ngIf="f.Customer_Name.errors.required"
-                class="alert alert-danger"
+
+
+
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" (navChange)="onNavChange($event)" class="nav-tabs">
+    <li [ngbNavItem]="1" >
+      <a ngbNavLink>Customer Detail</a>
+      <ng-template ngbNavContent>
+
+          <form [formGroup]="editcustomerForm" (ngSubmit)="updateCustomer()">
+              <div class="row">
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <small>Name <span class="text-danger">*</span></small>
+                    <div class="controls">
+                      <input
+                        type="text"
+                        class="form-control"
+                        autocomplete="off"
+                        formControlName="Customer_Name"
+                        aria-invalid="false"
+                        [(ngModel)]="data.Customer_Name"
+                      />
+          
+                      <div *ngIf="f.Customer_Name.touched && f.Customer_Name.invalid">
+                        <div
+                          *ngIf="f.Customer_Name.errors.required"
+                          class="alert alert-danger"
+                        >
+                          <small>Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.form-group -->
+          
+                  <div class="form-group">
+                    <div class="form-group">
+                      <small>Address <span class="text-danger">*</span></small>
+                      <div class="controls">
+                        <input
+                          type="text"
+                          class="form-control"
+                          autocomplete="off"
+                          formControlName="Customer_Address"
+                          [(ngModel)]="data.Customer_Address"
+                          aria-invalid="false"
+                        />
+                        <div
+                          *ngIf="f.Customer_Address.touched && f.Customer_Address.invalid"
+                          class="alert alert-danger"
+                        >
+                          <div *ngIf="f.Customer_Address.errors.required">
+                            <small> Address is required</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-group">
+                      <small>City<span class="text-danger">*</span></small>
+                      <div class="controls">
+                        <input
+                          type="text"
+                          class="form-control"
+                          autocomplete="off"
+                          formControlName="Customer_City"
+                          [(ngModel)]="data.Customer_City"
+                          aria-invalid="false"
+                        />
+                        <div
+                          *ngIf="f.Customer_City.touched && f.Customer_City.invalid"
+                          class="alert alert-danger"
+                        >
+                          <div *ngIf="f.Customer_City.errors.required">
+                            <small>Address is required</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-group">
+                      <small>State<span class="text-danger">*</span></small>
+                      <div class="controls">
+                        <input
+                          type="text"
+                          class="form-control"
+                          autocomplete="off"
+                          formControlName="Customer_State"
+                          [(ngModel)]="data.Customer_State"
+                          aria-invalid="false"
+                        />
+                        <div
+                          *ngIf="f.Customer_State.touched && f.Customer_State.invalid"
+                          class="alert alert-danger"
+                        >
+                          <div *ngIf="f.Customer_State.errors.required">
+                            <small>State is required</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-group">
+                      <small>Mobile No<span class="text-danger">*</span></small>
+                      <div class="controls">
+                        <input
+                          type="text"
+                          class="form-control"
+                          autocomplete="off"
+                          formControlName="Mobile_Number"
+                          [(ngModel)]="data.Mobile_Number"
+                          aria-invalid="false"
+                          readonly
+                        />
+                        <div
+                          *ngIf="f.Mobile_Number.touched && f.Mobile_Number.invalid"
+                          class="alert alert-danger"
+                        >
+                          <div *ngIf="f.Mobile_Number.errors.pattern">
+                            <small> Please enter numeric value</small>
+                          </div>
+                          <div *ngIf="f.Mobile_Number.errors.minlength">
+                            <small> Phone should be of minlength 7</small>
+                          </div>
+                          <div *ngIf="f.Mobile_Number.errors.maxlength">
+                            <small> Phone should be of maxlength 10</small>
+                          </div>
+          
+                          <div *ngIf="f.Mobile_Number.errors.required">
+                            <small> Phone is required.</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                  <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <small>Email</small>
+                      <div class="controls">
+                        <input
+                          type="email"
+                          class="form-control"
+                          autocomplete="off"
+                          formControlName="Customer_Email_ID"
+                          [(ngModel)]="data.Customer_Email_ID"
+                          aria-invalid="false"
+                        />
+                        <div
+                          *ngIf="
+                            f.Customer_Email_ID.touched && f.Customer_Email_ID.invalid
+                          "
+                          class="help-block"
+                        >
+                          <div *ngIf="f.Customer_Email_ID.errors.email">
+                            <small> Email required</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <small>Loan ID</small>
+                    <div class="controls">
+                      <input
+                        type="text"
+                        class="form-control"
+                        autocomplete="off"
+                        formControlName="Loan_Approval_ID"
+                        [(ngModel)]="data.Loan_Approval_ID"
+                        aria-invalid="false"
+                      />
+          
+                      <div
+                        *ngIf="f.Loan_Approval_ID.touched && f.Loan_Approval_ID.invalid"
+                        class="alert alert-danger"
+                      >
+                        <div *ngIf="f.Loan_Approval_ID.errors.required">
+                          <small>Required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.form-group -->
+                  <div class="form-group">
+                    <small>Bank Branch Code<span class="text-danger">*</span></small>
+                    <div class="controls">
+                      <input
+                        type="text"
+                        class="form-control"
+                        autocomplete="off"
+                        formControlName="Bank_Branch_Code"
+                        [(ngModel)]="data.Bank_Branch_Code"
+                        aria-invalid="false"
+                      />
+                      <div
+                        *ngIf="f.Bank_Branch_Code.touched && f.Bank_Branch_Code.invalid"
+                        class="alert alert-danger"
+                      >
+                        <div *ngIf="f.Bank_Branch_Code.errors.required">
+                          <small>Code is required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.form-group -->
+          
+                  <div class="form-group">
+                    <small>Bank Account No<span class="text-danger">*</span></small>
+                    <div class="controls">
+                      <input
+                        type="text"
+                        class="form-control"
+                        autocomplete="off"
+                        formControlName="Bank_Account_Number"
+                        [(ngModel)]="data.Bank_Account_Number"
+                        aria-invalid="false"
+                        readonly
+                      />
+          
+                      <input
+                        type="text"
+                        class="form-control"
+                        autocomplete="off"
+                        formControlName="Enable_Disable_FG"
+                        [(ngModel)]="data.Enable_Disable_FG"
+                        [style.display]="'none'"
+                      />
+                      <div
+                        *ngIf="
+                          f.Bank_Account_Number.touched && f.Bank_Account_Number.invalid
+                        "
+                        class="alert alert-danger"
+                      >
+                        <div *ngIf="f.Bank_Account_Number.errors.required">
+                          <small> Code is required</small>
+                        </div>
+                        <div *ngIf="f.Bank_Account_Number.errors.minlength">
+                          <small> Minlength is 10.</small>
+                        </div>
+                        <div *ngIf="f.Bank_Account_Number.errors.pattern">
+                          <small> Numbers only.</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                  <div class="form-group">
+                    <small>Category<span class="text-danger">*</span></small>
+                    <div class="controls">
+                      <select
+                        class="form-control"
+                        multiple="multiple"
+                        multi-select
+                        formControlName="Categories"
+                        [(ngModel)]="cats.Category_ID"
+                      >
+                      <option value="0">ALl</option>
+                        <option
+                          *ngFor="let c of categories"
+                          [value]="c.Category_ID"
+                          [selected]="cats.Category_ID === c.Category_ID ? true : false"
+                          >{{ c.Category_Name }}</option
+                        >
+                      </select>
+          
+                    <!--   <div class="form-group">
+                          <small>Categories<span class="text-danger">*</span></small>
+                          <div class="control">
+                            <mat-form-field>
+                              <mat-label>All By Default</mat-label>
+                              <mat-select formControlName="Categories" multiple >
+                                <mat-option *ngFor="let c of categories" [value]="c.Category_ID"
+                                  >{{ c.Category_Name }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div> -->
+                    </div>
+                  </div>
+                </div>
+                <!-- /.col -->
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-info btn-outline">
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-info btn-outline"
+                  (click)="activeModal.close('Cross click')"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+       
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+
+        <a ngbNavLink>Edit Account No</a>
+        <ng-template ngbNavContent>
+            <form [formGroup]="UpdateAccountForm" (ngSubmit)="updateAccountno()">
+                <div class="cold-md-12">
+                    <div class="form-group">
+                        <small>Bank Account No<span class="text-danger">*</span></small>
+                      <div class="controls">
+                        <input class="form-control" placeholder="Enter New Account No" formControlName="account_no" style="width:  60%"/>
+                        <div 
+                        *ngIf="
+                          f2.account_no.touched && f2.account_no.invalid
+                        "
+                        class="alert alert-danger col-md-7"
+                      >
+                        <div *ngIf="f2.account_no.errors.required">
+                          <small> Required</small>
+                        </div>
+                        <div *ngIf="f2.account_no.errors.minlength">
+                          <small> Minlength is 10.</small>
+                        </div>
+                        <div *ngIf="f2.account_no.errors.pattern">
+                            <small> Numbers Only</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                        <small>Remarks</small>
+                      <div class="controls">
+                          <textarea
+                          matTextareaAutosize
+                          class="form-control" 
+                          formControlName="remarks"
+                          autocomplete="off"
+                          aria-invalid="false"
+                        rows="4"
+                          placeholder="Enter Remarks"
+                        ></textarea>   
+                      </div>
+                    </div>
+                </div>
+
+                <button
+                type="button"
+                class="btn btn-info btn-outline"
+                (click)="verifyAccountno()"
+                [disabled]="!UpdateAccountForm.valid"
               >
-                <small>Name is required</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.form-group -->
+               Verify
+              </button>
+                    <button
+                    type="submit"
+                    class="btn btn-info btn-outline"
+                    [disabled]="!accountVerified"
+                  >
+                   Update
+                  </button>
+      
+                 
+              </form>
+        </ng-template>
+     
 
-        <div class="form-group">
-          <div class="form-group">
-            <h5>Address <span class="text-danger">*</span></h5>
-            <div class="controls">
-              <input
-                type="text"
-                class="form-control"
-                autocomplete="off"
-                formControlName="Customer_Address"
-                [(ngModel)]="data.Customer_Address"
-                aria-invalid="false"
-              />
-              <div
-                *ngIf="f.Customer_Address.touched && f.Customer_Address.invalid"
-                class="alert alert-danger"
-              >
-                <div *ngIf="f.Customer_Address.errors.required">
-                  <small> Address is required</small>
+    </li>
+    <li [ngbNavItem]="3">
+        <a ngbNavLink>Edit Phone No</a>
+        <ng-template ngbNavContent>
+            <form [formGroup]="UpdatePhoneForm" (ngSubmit)="updatePhoneno()">
+                <div class="cold-md-12">
+                    <div class="form-group">
+                        <small>Phone No<span class="text-danger">*</span></small>
+                      <div class="controls">
+                        <input class="form-control" placeholder="Enter New Phone No" formControlName="phone_no" style="width:  60%"/>
+                        <div 
+                        *ngIf="
+                          f3.phone_no.touched && f3.phone_no.invalid
+                        "
+                        class="alert alert-danger col-md-7"
+                      >
+                        <div *ngIf="f3.phone_no.errors.required">
+                          <small> Required</small>
+                        </div>
+                        <div *ngIf="f3.phone_no.errors.minlength">
+                          <small> Minlength is 10.</small>
+                        </div>
+                        <div *ngIf="f3.phone_no.errors.pattern">
+                            <small> Numbers Only</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <small>Remarks</small>
+                      <div class="controls">
+                        
+                          <textarea
+                          matTextareaAutosize
+                           class="form-control"
+                        formControlName="remarks"
+                        placeholder="Enter Remarks"
+                        rows="4"
+                        ></textarea>
+                      </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-group">
-            <h5>City<span class="text-danger">*</span></h5>
-            <div class="controls">
-              <input
-                type="text"
-                class="form-control"
-                autocomplete="off"
-                formControlName="Customer_City"
-                [(ngModel)]="data.Customer_City"
-                aria-invalid="false"
-              />
-              <div
-                *ngIf="f.Customer_City.touched && f.Customer_City.invalid"
-                class="alert alert-danger"
-              >
-                <div *ngIf="f.Customer_City.errors.required">
-                  <small>Address is required</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-group">
-            <h5>State<span class="text-danger">*</span></h5>
-            <div class="controls">
-              <input
-                type="text"
-                class="form-control"
-                autocomplete="off"
-                formControlName="Customer_State"
-                [(ngModel)]="data.Customer_State"
-                aria-invalid="false"
-              />
-              <div
-                *ngIf="f.Customer_State.touched && f.Customer_State.invalid"
-                class="alert alert-danger"
-              >
-                <div *ngIf="f.Customer_State.errors.required">
-                  <small>State is required</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-group">
-            <h5>Mobile No<span class="text-danger">*</span></h5>
-            <div class="controls">
-              <input
-                type="text"
-                class="form-control"
-                autocomplete="off"
-                formControlName="Mobile_Number"
-                [(ngModel)]="data.Mobile_Number"
-                aria-invalid="false"
-              />
-              <div
-                *ngIf="f.Mobile_Number.touched && f.Mobile_Number.invalid"
-                class="alert alert-danger"
-              >
-                <div *ngIf="f.Mobile_Number.errors.pattern">
-                  <small> Please enter numeric value</small>
-                </div>
-                <div *ngIf="f.Mobile_Number.errors.minlength">
-                  <small> Phone should be of minlength 7</small>
-                </div>
-                <div *ngIf="f.Mobile_Number.errors.maxlength">
-                  <small> Phone should be of maxlength 10</small>
-                </div>
+                    <button
+                    type="submit"
+                    class="btn btn-info btn-outline"
+                    [disabled]="!UpdatePhoneForm.valid"
+                  >
+                   Update
+                  </button>
+      
+                 
+              </form>  
+          
+        </ng-template>
+    </li>
 
-                <div *ngIf="f.Mobile_Number.errors.required">
-                  <small> Phone is required.</small>
-                </div>
+
+
+
+    <li [ngbNavItem]="4">
+        <a ngbNavLink>Audit Logs</a>
+        <ng-template ngbNavContent>
+         
+            <div class="row">
+              <div class="table-responsive">
+                <table
+                  *ngIf="auditData"
+                  datatable="ng"
+                  [dtOptions]="dtOptions"
+                 
+                  class="display"
+                  style="width:100%"
+                  id="table123"
+                >
+                  <thead>
+                    <tr>
+                      
+                     
+                      <th>Field</th>
+                      <th>New Number</th>
+                      <th>Old Number</th>
+                      <th>Updated By</th>
+                      <th>Updated TS</th>
+                      <th>Remarks</th>
+                     
+          
+                     
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let a of auditData; index as i">
+                       
+                      <td >{{ a.FILEDNAME }}</td>
+                      <td >{{ a.NEWVALUE }}</td>
+                      <td >{{ a.OLDVALUE }}</td>
+                      <td >{{ a.UPDATED_BY }}</td>
+                      <td >{{ a.UPDATED_TS }}</td>
+                      <td >{{ a.USER_REMARKS }}</td>
+                     
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-          </div>
-        </div>
+        
+          
+        </ng-template>
+    </li>
+  </ul>
 
-        <!-- /.form-group -->
-      </div>
-      <!-- /.col -->
-      <div class="col-md-6 col-12">
-        <div class="form-group">
-          <div class="form-group">
-            <h5>Email</h5>
-            <div class="controls">
-              <input
-                type="email"
-                class="form-control"
-                autocomplete="off"
-                formControlName="Customer_Email_ID"
-                [(ngModel)]="data.Customer_Email_ID"
-                aria-invalid="false"
-              />
-              <div
-                *ngIf="
-                  f.Customer_Email_ID.touched && f.Customer_Email_ID.invalid
-                "
-                class="help-block"
-              >
-                <div *ngIf="f.Customer_Email_ID.errors.email">
-                  <small> Email required</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <h5>Loan Approval</h5>
-          <div class="controls">
-            <input
-              type="text"
-              class="form-control"
-              autocomplete="off"
-              formControlName="Loan_Approval_ID"
-              [(ngModel)]="data.Loan_Approval_ID"
-              aria-invalid="false"
-            />
-
-            <div
-              *ngIf="f.Loan_Approval_ID.touched && f.Loan_Approval_ID.invalid"
-              class="alert alert-danger"
-            >
-              <div *ngIf="f.Loan_Approval_ID.errors.required">
-                <small>Required</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.form-group -->
-        <div class="form-group">
-          <h5>Bank Branch Code<span class="text-danger">*</span></h5>
-          <div class="controls">
-            <input
-              type="text"
-              class="form-control"
-              autocomplete="off"
-              formControlName="Bank_Branch_Code"
-              [(ngModel)]="data.Bank_Branch_Code"
-              aria-invalid="false"
-            />
-            <div
-              *ngIf="f.Bank_Branch_Code.touched && f.Bank_Branch_Code.invalid"
-              class="alert alert-danger"
-            >
-              <div *ngIf="f.Bank_Branch_Code.errors.required">
-                <small>Code is required</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.form-group -->
-
-        <div class="form-group">
-          <h5>Bank Account No<span class="text-danger">*</span></h5>
-          <div class="controls">
-            <input
-              type="text"
-              class="form-control"
-              autocomplete="off"
-              formControlName="Bank_Account_Number"
-              [(ngModel)]="data.Bank_Account_Number"
-              aria-invalid="false"
-            />
-
-            <input
-              type="text"
-              class="form-control"
-              autocomplete="off"
-              formControlName="Enable_Disable_FG"
-              [(ngModel)]="data.Enable_Disable_FG"
-              [style.display]="'none'"
-            />
-            <div
-              *ngIf="
-                f.Bank_Account_Number.touched && f.Bank_Account_Number.invalid
-              "
-              class="alert alert-danger"
-            >
-              <div *ngIf="f.Bank_Account_Number.errors.required">
-                <small> Code is required</small>
-              </div>
-              <div *ngIf="f.Bank_Account_Number.errors.minlength">
-                <small> Minlength is 10.</small>
-              </div>
-              <div *ngIf="f.Bank_Account_Number.errors.pattern">
-                <small> Numbers only.</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <small>Category<span class="text-danger">*</span></small>
-          <div class="controls">
-            <select
-              class="form-control"
-              multiple="multiple"
-              multi-select
-              formControlName="Categories"
-              [(ngModel)]="cats.Category_ID"
-            >
-            <option value="0">ALl</option>
-              <option
-                *ngFor="let c of categories"
-                [value]="c.Category_ID"
-                [selected]="cats.Category_ID === c.Category_ID ? true : false"
-                >{{ c.Category_Name }}</option
-              >
-            </select>
-          </div>
-        </div>
-      </div>
-      <!-- /.col -->
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-info btn-outline">
-        Submit
-      </button>
-      <button
-        type="button"
-        class="btn btn-info btn-outline"
-        (click)="activeModal.close('Cross click')"
-      >
-        Close
-      </button>
-    </div>
-  </form>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
 </div>

@@ -16,3 +16,13 @@ export class Outlet {
 export class id {
   id: string;
 }
+
+export class AuditOutlet {
+  PK: number;
+  FILEDNAME: string;
+  OLDVALUE: string;
+  NEWVALUE: string;
+  UPDATED_BY: string;
+  UPDATED_TS: string;
+  USER_REMARKS: string;
+}

@@ -25,23 +25,16 @@ export class HeaderTopComponent implements OnInit {
   confirm() {
     if (confirm("Are you sure you want to logout?")) {
       this.toastr.warning("Please Wait........", "Logging Out", {
-        timeOut: 2000
+        timeOut: 1000
       });
-      this.authService.logout().subscribe(
-        success => {
-          if (success) {
-            console.log(success);
-            this.router.navigate(["/login"]);
-          } else {
-            this.toastr.warning("Invalid Token");
-          }
-        },
-        error => {
-          console.log(error);
+
+      this.authService.logout().subscribe(success => {
+        if (success) {
+          this.router.navigate(["/login"]);
         }
-      );
-    } else {
-      return false;
+      });
     }
+
+    return false;
   }
 }

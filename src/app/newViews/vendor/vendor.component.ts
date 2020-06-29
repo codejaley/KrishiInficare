@@ -19,6 +19,7 @@ import { ToastrService } from "ngx-toastr";
 
 import { Router } from "@angular/router";
 import { AddvendorComponent } from "./addvendor/addvendor.component";
+import { UpdatevendorComponent } from "./updatevendor/updatevendor.component";
 
 @Component({
   selector: "app-vendor",
@@ -130,8 +131,9 @@ export class VendorComponent implements OnInit {
 
   deleteItem(id: id) {
     if (confirm("Are you sure?")) {
+      this.toastr.clear();
       this.toastr.info("Please Wait", "", {
-        timeOut: 1000
+        timeOut: 10000
       });
       this.dataService
         .deleteVendor(id)
@@ -140,6 +142,7 @@ export class VendorComponent implements OnInit {
           data2 => {
             this.response = data2;
             if (this.response["Status"] !== "Success") {
+              this.toastr.clear();
               this.toastr.info(this.response["message"]);
             } else {
               this.dataService.getVendorlist().subscribe(data => {
@@ -147,6 +150,7 @@ export class VendorComponent implements OnInit {
 
                 this.tableData = data;
                 this.rerender();
+                this.toastr.clear();
                 this.toastr.success(this.response["message"]);
               });
             }
@@ -160,7 +164,20 @@ export class VendorComponent implements OnInit {
   }
 
   editVendor(data) {
-    console.log(data, "edit");
+    const editmodalRef = this.dialog.open(UpdatevendorComponent);
+    editmodalRef.componentInstance.vendorId = data[0];
+
+    this.status = editmodalRef.componentInstance.event.subscribe(res => {
+      this.status = res.data;
+      if (this.status == "Success") {
+        this.dataService.getVendorlist().subscribe(data => {
+          this.showSpinner = false;
+
+          this.tableData = data;
+          this.rerender();
+        });
+      }
+    });
   }
 
   navigateOutlet(data: any) {

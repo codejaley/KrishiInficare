@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { of, Observable } from "rxjs";
+import { of, Observable, throwError } from "rxjs";
 import { catchError, mapTo, tap, timeout } from "rxjs/operators";
 import { config } from "./../../config";
 import { Tokens } from "../models/tokens";
 import { ToastrService } from "ngx-toastr";
 import { Router, ActivatedRoute } from "@angular/router";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { error } from "util";
+import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
   providedIn: "root"
@@ -20,7 +22,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private cs: CookieService
   ) {}
 
   login(user: {
@@ -36,27 +39,22 @@ export class AuthService {
 
         mapTo(true),
         catchError(error => {
-          if (error) {
-            console.log(error);
-            this.toastr.warning(error.name, error.message);
-          } else {
-            return of(false);
-          }
+          this.toastr.clear();
+          return throwError(error);
         })
       );
   }
 
   logout() {
     return this.http
-      .post<any>(`${config.apiUrl}/api/Accounts/logout`, {
-        value: this.getRefreshToken()
+      .post<any>(`${config.apiUrl}/api/Accounts/Logout`, {
+        refreshToken: this.getRefreshToken()
       })
       .pipe(
         tap(() => this.doLogoutUser()),
         mapTo(true),
         catchError(error => {
-          console.log(error);
-          // return of(false);
+          alert(error.error);
           return of(false);
         })
       );
@@ -67,7 +65,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    return this.http
+    return; /* this.http
       .post<any>(`${config.apiUrl}/api/Accounts/RefreshToken`, {
         value: this.getRefreshToken()
       })
@@ -75,7 +73,7 @@ export class AuthService {
         tap((tokens: Tokens) => {
           this.storeJwtToken(tokens.Token);
         })
-      );
+      ); */
   }
 
   getJwtToken() {
@@ -97,14 +95,7 @@ export class AuthService {
   }
 
   private storeJwtToken(jwt: string) {
-    if (jwt == null || jwt == undefined) {
-      this.toastr.info("SESSION EXPIRED");
-
-      this.removeTokens();
-      this.router.navigate(["/login"]);
-    } else {
-      sessionStorage.setItem(this.JWT_TOKEN, jwt);
-    }
+    sessionStorage.setItem(this.JWT_TOKEN, jwt);
   }
 
   private storeTokens(tokens: Tokens) {
